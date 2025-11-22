@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'providers/app_state_provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/gacha_screen.dart';
@@ -12,6 +13,8 @@ import 'screens/profile_screen.dart';
 import 'screens/rooms_screen.dart';
 import 'screens/pet_detail_screen.dart';
 import 'screens/subscription_screen.dart';
+import 'screens/ai_pet_creation_screen.dart';
+import 'screens/ai_education_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +78,14 @@ class PetGameApp extends StatelessWidget {
         path: '/subscription',
         builder: (context, state) => SubscriptionScreen(),
       ),
+      GoRoute(
+        path: '/ai-pet-creation',
+        builder: (context, state) => AiPetCreationScreen(),
+      ),
+      GoRoute(
+        path: '/ai-education',
+        builder: (context, state) => AiEducationScreen(),
+      ),
     ],
   );
 
@@ -82,6 +93,15 @@ class PetGameApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Pet Game',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English
+        Locale('ja', ''), // Japanese
+      ],
       theme: ThemeData(
         primarySwatch: Colors.amber,
         scaffoldBackgroundColor: Colors.white,
