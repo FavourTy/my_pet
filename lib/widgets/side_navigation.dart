@@ -6,10 +6,10 @@ class SideNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       {'label': 'Event', 'icon': Icons.calendar_today, 'route': '/event-plaza'},
-      {'label': 'Work', 'icon': Icons.work, 'route': '/'},
-      {'label': 'Gifts', 'icon': Icons.card_giftcard, 'route': '/'},
+      {'label': 'AI Pet', 'icon': Icons.auto_awesome, 'route': '/ai-pet-creation'},
+      {'label': 'Learn', 'icon': Icons.school, 'route': '/ai-education'},
       {'label': 'Feed', 'icon': Icons.restaurant, 'route': '/'},
-      {'label': 'Tools', 'icon': Icons.build, 'route': '/'},
+      {'label': 'Rooms', 'icon': Icons.home, 'route': '/rooms'},
       {'label': 'Status', 'icon': Icons.trending_up, 'route': '/'},
       {'label': 'News', 'icon': Icons.notifications, 'route': '/'},
     ];
