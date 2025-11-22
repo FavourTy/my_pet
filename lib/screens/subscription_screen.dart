@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../services/subscription_service.dart';
 
 class SubscriptionScreen extends StatelessWidget {
-  final SubscriptionService _subscriptionService = SubscriptionService();
+//  final SubscriptionService _subscriptionService = SubscriptionService();
 
   @override
   Widget build(BuildContext context) {
-    final benefits = _subscriptionService.getPaidMembershipBenefits();
+  //  final benefits = _subscriptionService.getPaidMembershipBenefits();
 
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +57,7 @@ class SubscriptionScreen extends StatelessWidget {
           ),
           SizedBox(height: 16),
 
-          ...benefits.map((benefit) => _buildBenefitItem(benefit)),
+        //  ...benefits.map((benefit) => _buildBenefitItem(benefit)),
 
           SizedBox(height: 32),
 

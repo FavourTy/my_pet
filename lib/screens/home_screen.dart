@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedTabIndex = 1; // Start on 'Items' tab
+  int _selectedTabIndex = 1; 
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: 180,
                 child: SideNavigation(),
               ).animate().fadeIn(delay: 200.ms).slideX(begin: 1),
-
-              // Action Buttons (dynamic based on tab)
               Positioned(
                 bottom: 96,
                 left: 0,

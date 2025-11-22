@@ -3,8 +3,7 @@ import '../models/pet.dart';
 
 class PetDisplay extends StatelessWidget {
   final Pet pet;
-
-  const PetDisplay({Key? key, required this.pet}) : super(key: key);
+  const PetDisplay({super.key, required this.pet});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class PetDisplay extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Pet image placeholder
+          
           Container(
             width: 200,
             height: 200,
