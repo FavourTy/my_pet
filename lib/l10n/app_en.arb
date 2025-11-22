@@ -1,0 +1,339 @@
+{
+  "@@locale": "en",
+  
+  "appTitle": "Pet Game",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home screen label"
+  },
+  
+  "gacha": "Gacha",
+  "@gacha": {
+    "description": "Gacha screen label"
+  },
+  
+  "plaza": "Plaza",
+  "@plaza": {
+    "description": "Plaza screen label"
+  },
+  
+  "eventPlaza": "Event Plaza",
+  "@eventPlaza": {
+    "description": "Event plaza screen label"
+  },
+  
+  "shop": "Shop",
+  "@shop": {
+    "description": "Shop screen label"
+  },
+  
+  "bazaar": "Bazaar",
+  "@bazaar": {
+    "description": "Bazaar screen label"
+  },
+  
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen label"
+  },
+  
+  "rooms": "Rooms",
+  "@rooms": {
+    "description": "Rooms screen label"
+  },
+  
+  "subscription": "Subscription",
+  "@subscription": {
+    "description": "Subscription screen label"
+  },
+  
+  "yearsOld": "{years} years old",
+  "@yearsOld": {
+    "description": "Display pet age",
+    "placeholders": {
+      "years": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  
+  "points": "Points",
+  "@points": {
+    "description": "Points label"
+  },
+  
+  "coins": "Coins",
+  "@coins": {
+    "description": "Coins label"
+  },
+  
+  "feed": "Feed",
+  "@feed": {
+    "description": "Feed action"
+  },
+  
+  "play": "Play",
+  "@play": {
+    "description": "Play action"
+  },
+  
+  "water": "Water",
+  "@water": {
+    "description": "Water plants action"
+  },
+  
+  "createPet": "Create Pet",
+  "@createPet": {
+    "description": "Create new pet button"
+  },
+  
+  "aiPetCreation": "AI Pet Creation",
+  "@aiPetCreation": {
+    "description": "AI pet creation feature title"
+  },
+  
+  "aiPetCreationDescription": "Create a unique pet using AI (Paid members only)",
+  "@aiPetCreationDescription": {
+    "description": "AI pet creation feature description"
+  },
+  
+  "petName": "Pet Name",
+  "@petName": {
+    "description": "Pet name input label"
+  },
+  
+  "petType": "Pet Type",
+  "@petType": {
+    "description": "Pet type selection label"
+  },
+  
+  "dog": "Dog",
+  "@dog": {
+    "description": "Dog pet type"
+  },
+  
+  "cat": "Cat",
+  "@cat": {
+    "description": "Cat pet type"
+  },
+  
+  "other": "Other",
+  "@other": {
+    "description": "Other pet type"
+  },
+  
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Pet appearance customization"
+  },
+  
+  "personality": "Personality",
+  "@personality": {
+    "description": "Pet personality traits"
+  },
+  
+  "generateWithAI": "Generate with AI",
+  "@generateWithAI": {
+    "description": "Button to generate pet with AI"
+  },
+  
+  "educationalAdvice": "Educational Advice",
+  "@educationalAdvice": {
+    "description": "Educational advice feature title"
+  },
+  
+  "askQuestion": "Ask a Question",
+  "@askQuestion": {
+    "description": "Ask question input label"
+  },
+  
+  "getAdvice": "Get Advice",
+  "@getAdvice": {
+    "description": "Get advice button"
+  },
+  
+  "trainingVideos": "Training Videos",
+  "@trainingVideos": {
+    "description": "Training videos section title"
+  },
+  
+  "freeMember": "Free Member",
+  "@freeMember": {
+    "description": "Free membership tier"
+  },
+  
+  "paidMember": "Paid Member",
+  "@paidMember": {
+    "description": "Paid membership tier"
+  },
+  
+  "premiumMember": "Premium Member",
+  "@premiumMember": {
+    "description": "Premium membership tier"
+  },
+  
+  "upgradeToPremium": "Upgrade to Premium",
+  "@upgradeToPremium": {
+    "description": "Upgrade to premium button"
+  },
+  
+  "paidMemberOnly": "Paid Members Only",
+  "@paidMemberOnly": {
+    "description": "Paid members only label"
+  },
+  
+  "roomQuota": "Room Quota: {current}/{max}",
+  "@roomQuota": {
+    "description": "Room quota display",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "2"
+      },
+      "max": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  
+  "expandRoomQuota": "Expand Room Quota",
+  "@expandRoomQuota": {
+    "description": "Expand room quota button"
+  },
+  
+  "addNewRoom": "Add New Room",
+  "@addNewRoom": {
+    "description": "Add new room button"
+  },
+  
+  "roomName": "Room Name",
+  "@roomName": {
+    "description": "Room name input label"
+  },
+  
+  "furniture": "Furniture",
+  "@furniture": {
+    "description": "Furniture category"
+  },
+  
+  "decoration": "Decoration",
+  "@decoration": {
+    "description": "Decoration category"
+  },
+  
+  "clothes": "Clothes",
+  "@clothes": {
+    "description": "Clothes category"
+  },
+  
+  "food": "Food",
+  "@food": {
+    "description": "Food category"
+  },
+  
+  "plantWithered": "This plant has withered! Water it to revive.",
+  "@plantWithered": {
+    "description": "Plant withered notification"
+  },
+  
+  "petHungry": "Your pet is hungry! Feed them soon.",
+  "@petHungry": {
+    "description": "Pet hungry notification"
+  },
+  
+  "timeOfDayMorning": "Morning",
+  "@timeOfDayMorning": {
+    "description": "Morning time of day"
+  },
+  
+  "timeOfDayAfternoon": "Afternoon",
+  "@timeOfDayAfternoon": {
+    "description": "Afternoon time of day"
+  },
+  
+  "timeOfDayEvening": "Evening",
+  "@timeOfDayEvening": {
+    "description": "Evening time of day"
+  },
+  
+  "timeOfDayNight": "Night",
+  "@timeOfDayNight": {
+    "description": "Night time of day"
+  },
+  
+  "moodHappy": "Happy",
+  "@moodHappy": {
+    "description": "Happy mood"
+  },
+  
+  "moodSad": "Sad",
+  "@moodSad": {
+    "description": "Sad mood"
+  },
+  
+  "moodHungry": "Hungry",
+  "@moodHungry": {
+    "description": "Hungry mood"
+  },
+  
+  "moodPlayful": "Playful",
+  "@moodPlayful": {
+    "description": "Playful mood"
+  },
+  
+  "moodSleepy": "Sleepy",
+  "@moodSleepy": {
+    "description": "Sleepy mood"
+  },
+  
+  "event": "Event",
+  "@event": {
+    "description": "Event label"
+  },
+  
+  "limitedTime": "Limited Time",
+  "@limitedTime": {
+    "description": "Limited time label"
+  },
+  
+  "exclusiveItems": "Exclusive Items",
+  "@exclusiveItems": {
+    "description": "Exclusive items label"
+  },
+  
+  "addFriend": "Add Friend",
+  "@addFriend": {
+    "description": "Add friend button"
+  },
+  
+  "inviteFriends": "Invite Friends",
+  "@inviteFriends": {
+    "description": "Invite friends button"
+  },
+  
+  "dailyCommunication": "Daily Communication",
+  "@dailyCommunication": {
+    "description": "Daily communication feature"
+  },
+  
+  "dmMessages": "DM Messages",
+  "@dmMessages": {
+    "description": "Direct messages"
+  },
+  
+  "petLossCommunity": "Pet Loss Community",
+  "@petLossCommunity": {
+    "description": "Pet loss support community"
+  },
+  
+  "petCareGuide": "Pet Care Guide",
+  "@petCareGuide": {
+    "description": "Pet care guide"
+  }
+}
