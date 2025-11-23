@@ -476,7 +476,6 @@ enum PetActivity {
   bathing, 
   brushing, 
   sleeping,  // New: for bedroom
-  toileting 
 }
 
 /// Interactive mode for user-controlled actions
@@ -631,18 +630,21 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     }
   }
   
-  void _completeActivity() {
-    final rewards = _calculateRewards();
-    
+  void _updateStats(Map<String, int> rewards) {
     setState(() {
       _lovePoints += rewards['love']!;
       _coins += rewards['coins']!;
-      _cleanliness += rewards['cleanliness']!;
-      _happiness += rewards['happiness']!;
-      
-      _cleanliness = _cleanliness.clamp(0, 100);
-      _happiness = _happiness.clamp(0, 100);
-      
+      _cleanliness = (_cleanliness + rewards['cleanliness']!).clamp(0, 100);
+      _happiness = (_happiness + rewards['happiness']!).clamp(0, 100);
+    });
+  }
+  
+  void _completeActivity() {
+    final rewards = _calculateRewards();
+    
+    _updateStats(rewards);
+    
+    setState(() {
       _activity = PetActivity.idle;
       _interactiveMode = InteractiveMode.none;
       _interactiveProgress = 0.0;
@@ -676,6 +678,43 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   }
   
   // --- UI BUILDERS ---
+  
+  Widget _buildNetworkImage(String url, {double? width, double? height, BoxFit? fit}) {
+    return Image.network(
+      url,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(
+            Icons.pets,
+            size: (width ?? 100) * 0.5,
+            color: Colors.grey[600],
+          ),
+        );
+      },
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                : null,
+          ),
+        );
+      },
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -772,7 +811,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
           Positioned(
             bottom: size.height * 0.2,
             left: 10,
-            child: Image.network(
+            child: _buildNetworkImage(
               'https://cdn-icons-png.flaticon.com/512/3131/3131848.png',
               width: size.width * 0.25,
             ),
@@ -780,7 +819,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
           Positioned(
             bottom: size.height * 0.18,
             right: 10,
-            child: Image.network(
+            child: _buildNetworkImage(
               'https://cdn-icons-png.flaticon.com/512/2239/2239318.png',
               width: size.width * 0.4,
             ),
@@ -792,7 +831,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
           Positioned(
             bottom: size.height * 0.2,
             left: size.width * 0.15,
-            child: Image.network(
+            child: _buildNetworkImage(
               'https://cdn-icons-png.flaticon.com/512/3014/3014526.png',
               width: size.width * 0.6,
             ),
@@ -804,7 +843,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
           Positioned(
             bottom: size.height * 0.2,
             left: size.width * 0.1,
-            child: Image.network(
+            child: _buildNetworkImage(
               'https://cdn-icons-png.flaticon.com/512/2511/2511419.png',
               width: size.width * 0.5,
             ),
@@ -899,7 +938,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
+                  _buildNetworkImage(
                     "https://cdn-icons-png.flaticon.com/512/616/616408.png",
                     fit: BoxFit.cover,
                   ),
@@ -1003,11 +1042,12 @@ class _GameRoomScreenState extends State<GameRoomScreen>
         
         // Bubbles for bathing
         if (_interactiveMode == InteractiveMode.bathingInteractive)
-          ..._bubblePositions.asMap().entries.map((entry) {
-            return Positioned(
-              left: entry.value.dx - 15,
-              top: entry.value.dy - 15,
+          for (int i = 0; i < _bubblePositions.length; i++)
+            Positioned(
+              left: _bubblePositions[i].dx - 15,
+              top: _bubblePositions[i].dy - 15,
               child: TweenAnimationBuilder(
+                key: ValueKey('bubble_$i'),
                 tween: Tween<double>(begin: 0.0, end: 1.0),
                 duration: const Duration(milliseconds: 1000),
                 builder: (context, double value, child) {
@@ -1031,8 +1071,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
                   );
                 },
               ),
-            );
-          }).toList(),
+            ),
         
         // Sparkles for brushing
         if (_interactiveMode == InteractiveMode.brushingInteractive && 
