@@ -1022,7 +1022,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     return ModelViewer(
       src: 'assets/images/dog.glb',
       alt: '3D Dog Model',
-      autoRotate: true,
+      autoRotate: _activity == PetActivity.idle, // Only auto-rotate when idle to save resources
       autoPlay: true,
       cameraControls: false,
       backgroundColor: Colors.transparent,
