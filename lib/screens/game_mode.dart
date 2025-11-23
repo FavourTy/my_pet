@@ -439,28 +439,17 @@ import 'dart:math' as math;
 // PREVIOUS CODE - ALL COMMENTED OUT AS REQUESTED
 // ============================================================================
 /*
-// --- UPDATED: Added Bedroom to Locations ---
-enum GameLocation { livingRoom, bathroom, bedroom }
-
-enum PetActivity { idle, bathing, brushing, cleaningSheets, toileting }
-
-class Room {
-  String id;
-  String name;
-  bool isDirty;
-  Room({required this.id, required this.name, this.isDirty = false});
-}
-
-class GameRoomScreen extends StatefulWidget {
-  const GameRoomScreen({super.key});
-
-  @override
-  _GameRoomScreenState createState() => _GameRoomScreenState();
-}
-
-class _GameRoomScreenState extends State<GameRoomScreen> {
-  // ... all previous code ...
-}
+// The previous implementation included:
+// - Basic GameLocation enum (livingRoom, bathroom, bedroom)
+// - Basic PetActivity enum (idle, bathing, brushing, cleaningSheets, toileting)
+// - Simple Room class
+// - GameRoomScreen with state management
+// - Timer-based activities (not interactive)
+// - Basic UI with furniture and pet positioning
+// 
+// This has been replaced with an enhanced interactive version below
+// that includes 3D-like animations, gesture-based interactions,
+// and Talking Tom/Angela-style care activities.
 */
 
 // ============================================================================
@@ -632,10 +621,10 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   
   void _updateStats(Map<String, int> rewards) {
     setState(() {
-      _lovePoints += rewards['love']!;
-      _coins += rewards['coins']!;
-      _cleanliness = (_cleanliness + rewards['cleanliness']!).clamp(0, 100);
-      _happiness = (_happiness + rewards['happiness']!).clamp(0, 100);
+      _lovePoints += rewards['love'] ?? 0;
+      _coins += rewards['coins'] ?? 0;
+      _cleanliness = (_cleanliness + (rewards['cleanliness'] ?? 0)).clamp(0, 100);
+      _happiness = (_happiness + (rewards['happiness'] ?? 0)).clamp(0, 100);
     });
   }
   
@@ -675,6 +664,38 @@ class _GameRoomScreenState extends State<GameRoomScreen>
       default:
         return {'love': 0, 'coins': 0, 'cleanliness': 0, 'happiness': 0};
     }
+  }
+  
+  Widget _buildBubble(Offset position, int index) {
+    return Positioned(
+      left: position.dx - 15,
+      top: position.dy - 15,
+      child: TweenAnimationBuilder(
+        key: ValueKey('bubble_$index'),
+        tween: Tween<double>(begin: 0.0, end: 1.0),
+        duration: const Duration(milliseconds: 1000),
+        builder: (context, double value, child) {
+          return Opacity(
+            opacity: 1 - value,
+            child: Transform.scale(
+              scale: 1 + value,
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white.withOpacity(0.7),
+                  border: Border.all(
+                    color: Colors.blue.withOpacity(0.5),
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
   
   // --- UI BUILDERS ---
@@ -1043,35 +1064,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
         // Bubbles for bathing
         if (_interactiveMode == InteractiveMode.bathingInteractive)
           for (int i = 0; i < _bubblePositions.length; i++)
-            Positioned(
-              left: _bubblePositions[i].dx - 15,
-              top: _bubblePositions[i].dy - 15,
-              child: TweenAnimationBuilder(
-                key: ValueKey('bubble_$i'),
-                tween: Tween<double>(begin: 0.0, end: 1.0),
-                duration: const Duration(milliseconds: 1000),
-                builder: (context, double value, child) {
-                  return Opacity(
-                    opacity: 1 - value,
-                    child: Transform.scale(
-                      scale: 1 + value,
-                      child: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.7),
-                          border: Border.all(
-                            color: Colors.blue.withOpacity(0.5),
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            _buildBubble(_bubblePositions[i], i),
         
         // Sparkles for brushing
         if (_interactiveMode == InteractiveMode.brushingInteractive && 
