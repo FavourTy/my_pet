@@ -435,6 +435,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 // ============================================================================
 // PREVIOUS CODE - ALL COMMENTED OUT AS REQUESTED
@@ -501,6 +502,12 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   int _coins = 12345;
   int _cleanliness = 60;  // New: cleanliness stat
   int _happiness = 75;    // New: happiness stat
+  
+  // 3D Model toggle
+  bool _use3DModel = true;  // Toggle to use 3D model or fallback image
+  
+  // Dirty mode (from commented code)
+  bool _isDirtyMode = false; // Toggles the "Messy" view
   
   // Animation controllers for 3D-like effects
   late AnimationController _bounceController;
@@ -699,6 +706,22 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     );
   }
   
+  void _toggleDirtyMode() {
+    setState(() {
+      _isDirtyMode = !_isDirtyMode;
+    });
+  }
+  
+  Widget _buildMudStain() {
+    return Opacity(
+      opacity: 0.8,
+      child: _buildNetworkImage(
+        'https://cdn-icons-png.flaticon.com/512/785/785118.png', // Mud icon
+        width: 100,
+      ),
+    );
+  }
+  
   // --- UI BUILDERS ---
   
   Widget _buildNetworkImage(String url, {double? width, double? height, BoxFit? fit}) {
@@ -758,6 +781,18 @@ class _GameRoomScreenState extends State<GameRoomScreen>
             
             // 3D-like Pet Model
             _build3DPetModel(size),
+            
+            // Dirt overlay (from commented code)
+            if (_isDirtyMode) ...[
+              // Mud stains
+              Positioned(bottom: 50, left: 50, child: _buildMudStain()),
+              Positioned(bottom: 150, right: 80, child: _buildMudStain()),
+              Positioned(bottom: 20, right: 20, child: _buildMudStain()),
+              // Dark overlay to make it look gloomy
+              Positioned.fill(
+                child: Container(color: Colors.black.withOpacity(0.3)),
+              ),
+            ],
             
             // Interactive effects
             if (_interactiveMode != InteractiveMode.none)
@@ -939,7 +974,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Main dog image with enhanced 3D effect
+          // Main dog - 3D model or fallback image
           Container(
             height: 160,
             width: 160,
@@ -951,34 +986,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
               ),
             ),
             child: ClipOval(
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  _buildNetworkImage(
-                    "https://cdn-icons-png.flaticon.com/512/616/616408.png",
-                    fit: BoxFit.cover,
-                  ),
-                  // Shine effect for 3D look
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withOpacity(0.4),
-                            Colors.transparent,
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: _use3DModel ? _build3DModelViewer() : _buildFallbackImage(),
             ),
           ),
           
@@ -1007,6 +1015,51 @@ class _GameRoomScreenState extends State<GameRoomScreen>
         ],
       ),
     );
+  }
+
+  // 3D Model Viewer
+  Widget _build3DModelViewer() {
+    return ModelViewer(
+      src: 'assets/images/dog.glb',
+      alt: '3D Dog Model',
+      autoRotate: true,
+      autoPlay: true,
+      cameraControls: false,
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  // Fallback to 2D image
+  Widget _buildFallbackImage() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        _buildNetworkImage(
+          "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+          fit: BoxFit.cover,
+        ),
+        // Shine effect for 3D look
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.white.withOpacity(0.4),
+                  Colors.transparent,
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
   }
   
   Widget _buildInteractiveEffects(Size size) {
@@ -1200,6 +1253,17 @@ class _GameRoomScreenState extends State<GameRoomScreen>
               backgroundColor: Colors.brown,
             ),
           ),
+        
+        // Dirty Mode Toggle (from commented code - DEV TOOLS)
+        Positioned(
+          bottom: 20,
+          right: 20,
+          child: FloatingActionButton.small(
+            onPressed: _toggleDirtyMode,
+            backgroundColor: _isDirtyMode ? Colors.redAccent : Colors.grey,
+            child: const Icon(Icons.cleaning_services),
+          ),
+        ),
       ],
     );
   }
@@ -1207,121 +1271,144 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   void _showCareDialog() {
     showDialog(
       context: context,
-      builder: (context) => Dialog(
-        backgroundColor: Colors.transparent,
-        child: Container(
-          width: 340,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Take care of your dog',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+      builder: (context) => _buildCareDialog(),
+    );
+  }
+
+  // --- POPUP DIALOG (Matches "Take Care" Screenshot) ---
+  Widget _buildCareDialog() {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.all(10),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // The White Card
+          Container(
+            width: 320,
+            padding: const EdgeInsets.only(
+              top: 40,
+              bottom: 20,
+              left: 20,
+              right: 20,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                const Text(
+                  "Take care in the living room",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              _buildCareOption(
-                'Bathe the dog',
-                Icons.bathtub,
-                Colors.blue,
-                'Clean and fresh!',
-                _startInteractiveBathing,
-              ),
-              const SizedBox(height: 12),
-              _buildCareOption(
-                'Brush teeth',
-                Icons.brush,
-                Colors.cyan,
-                'Sparkling smile!',
-                _startInteractiveBrushing,
-              ),
-              const SizedBox(height: 12),
-              _buildCareOption(
-                'Sleep in bedroom',
-                Icons.bed,
-                Colors.purple,
-                'Sweet dreams!',
-                _startSleeping,
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-            ],
+                const SizedBox(height: 20),
+
+                // Options Grid
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    _buildCareOption(
+                      "Care",
+                      isSelected: true,
+                    ), // The checkbox style
+                    _buildCareOption("Dry shampoo", icon: Icons.cut, onTap: _startInteractiveBathing),
+                    _buildCareOption("Clean the sheets", icon: Icons.bed, onTap: _startSleeping),
+                    _buildCareOption("Tooth brushing", icon: Icons.clean_hands, onTap: _startInteractiveBrushing),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
+
+          // The "Close" X button (Top Right of card)
+          Positioned(
+            right: 0,
+            top: 0,
+            child: IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+
+          // Decorative Question Mark (from screenshot)
+          Positioned(
+            top: -10,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFFFFF176),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.question_mark,
+                color: Colors.brown,
+                size: 20,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
-  
+
   Widget _buildCareOption(
-    String title,
-    IconData icon,
-    Color color,
-    String subtitle,
-    VoidCallback onTap,
-  ) {
-    return InkWell(
+    String label, {
+    IconData? icon,
+    bool isSelected = false,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.3), width: 2),
-        ),
+        width: 130,
+        padding: const EdgeInsets.all(8),
         child: Row(
           children: [
+            // The "Box"
             Container(
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12),
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(icon, color: Colors.white, size: 28),
+              child: isSelected
+                  ? const Icon(Icons.check, color: Colors.grey)
+                  : (icon != null
+                        ? Icon(icon, size: 20, color: Colors.brown)
+                        : null),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 8),
+            // The Label
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  color: icon != null
+                      ? const Color(0xFFFFF176)
+                      : null, // Yellow highlight for actions
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
                   ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-            Icon(Icons.arrow_forward_ios, color: color, size: 20),
           ],
         ),
       ),
