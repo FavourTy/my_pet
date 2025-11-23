@@ -434,6 +434,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
+import 'package:cached_network_image/cached_network_image.dart';
 
 // ============================================================================
 // PREVIOUS CODE - ALL COMMENTED OUT AS REQUESTED
@@ -619,7 +620,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     }
   }
   
-  void _updateStats(Map<String, int> rewards) {
+  void _applyRewards(Map<String, int> rewards) {
     setState(() {
       _lovePoints += rewards['love'] ?? 0;
       _coins += rewards['coins'] ?? 0;
@@ -631,7 +632,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   void _completeActivity() {
     final rewards = _calculateRewards();
     
-    _updateStats(rewards);
+    _applyRewards(rewards);
     
     setState(() {
       _activity = PetActivity.idle;
@@ -701,39 +702,33 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   // --- UI BUILDERS ---
   
   Widget _buildNetworkImage(String url, {double? width, double? height, BoxFit? fit}) {
-    return Image.network(
-      url,
+    return CachedNetworkImage(
+      imageUrl: url,
       width: width,
       height: height,
       fit: fit,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            Icons.pets,
-            size: (width ?? 100) * 0.5,
-            color: Colors.grey[600],
-          ),
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
-        return Container(
-          width: width,
-          height: height,
-          alignment: Alignment.center,
-          child: CircularProgressIndicator(
-            value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                : null,
-          ),
-        );
-      },
+      placeholder: (context, url) => Container(
+        width: width,
+        height: height,
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[400]!),
+        ),
+      ),
+      errorWidget: (context, url, error) => Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(
+          Icons.pets,
+          size: (width ?? 100) * 0.5,
+          color: Colors.grey[600],
+        ),
+      ),
     );
   }
   
