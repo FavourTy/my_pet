@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/game_mode.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,16 +19,11 @@ import 'screens/ai_education_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final appState = AppStateProvider();
   await appState.initialize();
-  
-  runApp(
-    ChangeNotifierProvider.value(
-      value: appState,
-      child: PetGameApp(),
-    ),
-  );
+
+  runApp(ChangeNotifierProvider.value(value: appState, child: PetGameApp()));
 }
 
 class PetGameApp extends StatelessWidget {
@@ -35,38 +31,17 @@ class PetGameApp extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => HomeScreen(),
-      ),
-      GoRoute(
-        path: '/gacha',
-        builder: (context, state) => GachaScreen(),
-      ),
-      GoRoute(
-        path: '/plaza',
-        builder: (context, state) => PlazaScreen(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => HomeScreen()),
+      GoRoute(path: '/gacha', builder: (context, state) => GachaScreen()),
+      GoRoute(path: '/plaza', builder: (context, state) => PlazaScreen()),
       GoRoute(
         path: '/event-plaza',
         builder: (context, state) => EventPlazaScreen(),
       ),
-      GoRoute(
-        path: '/shop',
-        builder: (context, state) => ShopScreen(),
-      ),
-      GoRoute(
-        path: '/bazaar',
-        builder: (context, state) => BazaarScreen(),
-      ),
-      GoRoute(
-        path: '/profile',
-        builder: (context, state) => ProfileScreen(),
-      ),
-      GoRoute(
-        path: '/rooms',
-        builder: (context, state) => RoomsScreen(),
-      ),
+      GoRoute(path: '/shop', builder: (context, state) => ShopScreen()),
+      GoRoute(path: '/bazaar', builder: (context, state) => BazaarScreen()),
+      GoRoute(path: '/profile', builder: (context, state) => ProfileScreen()),
+      GoRoute(path: '/rooms', builder: (context, state) => GameRoomScreen()),
       GoRoute(
         path: '/pet/:id',
         builder: (context, state) {

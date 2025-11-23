@@ -51,7 +51,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                 )
               : Column(
                   children: [
-                    // Room quota display
+                    
                     Container(
                       padding: EdgeInsets.all(16),
                       color: Color(0xFFF1F8E9),
