@@ -83,6 +83,11 @@ flutter:
   assets:
    - assets/images/
    - assets/fonts/
+   - assets/images/dog.glb
+   - assets/images/dog_1.glb
+   - assets/images/dog_2.glb
+   - assets/images/dog_3.glb
+   - assets/images/dog_4.glb
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

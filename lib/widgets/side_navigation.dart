@@ -6,7 +6,11 @@ class SideNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       {'label': 'Event', 'icon': Icons.calendar_today, 'route': '/event-plaza'},
-      {'label': 'AI Pet', 'icon': Icons.auto_awesome, 'route': '/ai-pet-creation'},
+      {
+        'label': 'AI Pet',
+        'icon': Icons.auto_awesome,
+        'route': '/ai-pet-creation',
+      },
       {'label': 'Learn', 'icon': Icons.school, 'route': '/ai-education'},
       {'label': 'Feed', 'icon': Icons.restaurant, 'route': '/'},
       {'label': 'Rooms', 'icon': Icons.home, 'route': '/rooms'},
@@ -32,7 +36,12 @@ class SideNavigation extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [Color(0xFFF8E079), Color(0xFFF5D760)],
                 ),
-                borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16), // Rounded
+                  bottomRight: Radius.circular(16), // Rounded
+                  topRight: Radius.zero, // Sharp
+                  bottomLeft: Radius.zero, // Sharp
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
