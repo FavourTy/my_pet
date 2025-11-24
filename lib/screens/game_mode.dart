@@ -1043,7 +1043,7 @@ enum GameLocation { livingRoom, bathroom, bedroom }
 
 enum PetActivity { idle, bathing, brushing, sleeping }
 
-enum InteractiveMode { none, bathingInteractive, brushingInteractive }
+enum InteractiveMode { none, bathingInteractive, brushingInteractive, bedsheetInteractive }
 
 class GameRoomScreen extends StatefulWidget {
   const GameRoomScreen({super.key});
@@ -1075,6 +1075,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   double _interactiveProgress = 0.0;
   int _brushStrokes = 0;
   int _bathBubbles = 0;
+  int _bedsheetSwipes = 0;
   List<Offset> _bubblePositions = [];
   Timer? _activityTimer;
   bool _isDirtyMode = false;
@@ -1138,19 +1139,15 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     });
   }
 
-  // 3. Clean Sheets Logic (Bedroom -> Auto Timer)
+  // 3. Clean Sheets Logic (Bedroom -> Interactive Swipe)
   void _startCleaningSheets() {
     Navigator.pop(context);
     setState(() {
       _location = GameLocation.bedroom;
-      _activity = PetActivity.sleeping; // Dog sleeps while we clean
-      _interactiveMode = InteractiveMode.none;
-    });
-
-    // Auto-finish after 3 seconds
-    _activityTimer?.cancel();
-    _activityTimer = Timer(const Duration(seconds: 3), () {
-      _completeActivity(10, 20);
+      _activity = PetActivity.sleeping;
+      _interactiveMode = InteractiveMode.bedsheetInteractive;
+      _interactiveProgress = 0.0;
+      _bedsheetSwipes = 0;
     });
   }
 
@@ -1178,6 +1175,17 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     if (_interactiveProgress >= 1.0) _completeActivity(30, 40);
   }
 
+  // Handle Swipe for Bedsheet Laying
+  void _handleBedsheetGesture(Offset localPosition) {
+    if (_interactiveMode != InteractiveMode.bedsheetInteractive) return;
+    setState(() {
+      _bedsheetSwipes++;
+      _interactiveProgress = (_bedsheetSwipes / 25).clamp(0.0, 1.0);
+    });
+
+    if (_interactiveProgress >= 1.0) _completeActivity(15, 25);
+  }
+
   void _completeActivity(int loveReward, int coinReward) {
     setState(() {
       _activity = PetActivity.idle;
@@ -1185,6 +1193,9 @@ class _GameRoomScreenState extends State<GameRoomScreen>
       _lovePoints += loveReward;
       _coins += coinReward;
       _bubblePositions.clear();
+      _brushStrokes = 0;
+      _bathBubbles = 0;
+      _bedsheetSwipes = 0;
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -1216,7 +1227,13 @@ class _GameRoomScreenState extends State<GameRoomScreen>
 
     return Scaffold(
       body: GestureDetector(
-        onPanUpdate: (details) => _handleBathingGesture(details.localPosition),
+        onPanUpdate: (details) {
+          if (_interactiveMode == InteractiveMode.bathingInteractive) {
+            _handleBathingGesture(details.localPosition);
+          } else if (_interactiveMode == InteractiveMode.bedsheetInteractive) {
+            _handleBedsheetGesture(details.localPosition);
+          }
+        },
         onTap: () => _handleBrushingGesture(),
         child: Stack(
           children: [
@@ -1385,37 +1402,16 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   }
 
   Widget _buildFurniture(Size size) {
-    if (_location == GameLocation.bathroom) {
-      return Stack(
-        children: [
-          Positioned(
-            bottom: size.height * 0.22,
-            left: 10,
-            child: Image.network(
-              "https://cdn-icons-png.flaticon.com/512/3131/3131848.png",
-              width: 100,
-            ),
-          ), // Sink
-          Positioned(
-            bottom: size.height * 0.22,
-            right: -10,
-            child: Image.network(
-              "https://cdn-icons-png.flaticon.com/512/2239/2239318.png",
-              width: 180,
-            ),
-          ), // Tub
-        ],
-      );
-    } else {
-      // Bathroom
-      return SizedBox();
-    }
+    // All furniture removed from game modes as requested
+    return SizedBox();
   }
 
   Widget _buildInstructionOverlay(Size size) {
     String text = _interactiveMode == InteractiveMode.bathingInteractive
         ? "Swipe to Scrub!"
-        : "Tap to Brush!";
+        : _interactiveMode == InteractiveMode.bedsheetInteractive
+            ? "Swipe to Lay Bedsheet!"
+            : "Tap to Brush!";
 
     return Positioned(
       top: size.height * 0.3,
