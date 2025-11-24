@@ -26,7 +26,7 @@ class SideNavigation extends StatelessWidget {
             onTap: () {
               final route = item['route'] as String;
               if (route != '/') {
-                context.go(route);
+                context.push(route);
               }
             },
             child: Container(

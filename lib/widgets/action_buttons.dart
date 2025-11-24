@@ -19,7 +19,7 @@ class ActionButtons extends StatelessWidget {
               onPressed: () {
                 final route = button['route'] as String?;
                 if (route != null && route != '/') {
-                  context.go(route);
+                  context.push(route);
                 }
               },
               style: ElevatedButton.styleFrom(
