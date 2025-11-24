@@ -1293,8 +1293,6 @@ class _GameRoomScreenState extends State<GameRoomScreen>
                   ),
                 ),
               ),
-
-            // LAYER 8: Navigation & Dirty Mode
             if (!isHub && _interactiveMode == InteractiveMode.none)
               Positioned(
                 bottom: 30,
@@ -1387,23 +1385,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   }
 
   Widget _buildFurniture(Size size) {
-    if (_location == GameLocation.livingRoom) {
-      return Positioned(
-        bottom: size.height * 0.25,
-        left: size.width * 0.1,
-        child: Image.network("", width: 150), // Sofa
-      );
-    } else if (_location == GameLocation.bedroom) {
-      return Positioned(
-        bottom: size.height * 0.25,
-        left: size.width * 0.15,
-        child: Image.network(
-          "",
-          width: 200,
-        ), // Bed
-      );
-    } else {
-      // Bathroom
+    if (_location == GameLocation.bathroom) {
       return Stack(
         children: [
           Positioned(
@@ -1424,6 +1406,9 @@ class _GameRoomScreenState extends State<GameRoomScreen>
           ), // Tub
         ],
       );
+    } else {
+      // Bathroom
+      return SizedBox();
     }
   }
 

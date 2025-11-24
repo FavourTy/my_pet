@@ -32,6 +32,7 @@ class SideNavigation extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(bottom: 8),
               height: 38,
+              width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Color(0xFFF8E079), Color(0xFFF5D760)],
