@@ -1402,7 +1402,7 @@ class _GameRoomScreenState extends State<GameRoomScreen>
   }
 
   Widget _buildFurniture(Size size) {
-    // Furniture removed as requested - pet is now scrubbable without furniture
+    // All furniture removed from game modes as requested
     return SizedBox();
   }
 
