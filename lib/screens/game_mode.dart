@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
@@ -198,7 +197,6 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     }
   }
 
-  // --- BUILD METHOD ---
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -216,7 +214,6 @@ class _GameRoomScreenState extends State<GameRoomScreen>
         onTap: () => _handleBrushingGesture(),
         child: Stack(
           children: [
-            // LAYER 1: Background
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 800),
               child: Container(
@@ -234,10 +231,8 @@ class _GameRoomScreenState extends State<GameRoomScreen>
             // LAYER 2: Furniture
             _buildFurniture(size),
 
-            // LAYER 3: The Pet (2D or 3D)
-            _buildPetLayer(size),
-
-            // LAYER 4: Interactive Effects (Bubbles/Progress)
+            // // LAYER 3: The Pet (2D or 3D)
+            // _buildPetLayer(size),
             if (_interactiveMode != InteractiveMode.none) ...[
               for (int i = 0; i < _bubblePositions.length; i++)
                 _buildBubble(_bubblePositions[i], i),
@@ -362,7 +357,8 @@ class _GameRoomScreenState extends State<GameRoomScreen>
               width: 200,
 
               child: _use3DModel
-                  ? ModelViewer( // Logic: Use remote URL if Debug is ON, otherwise use local asset
+                  ? ModelViewer(
+                      // Logic: Use remote URL if Debug is ON, otherwise use local asset
                       src: _useRemoteDebugModel
                           ? 'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
                           : 'assets/images/dog.glb',
@@ -441,11 +437,8 @@ class _GameRoomScreenState extends State<GameRoomScreen>
     );
   }
 
-  // --- COORDINATES ---
   double _getPetBottom(Size size) {
     if (_location == GameLocation.bathroom) {
-      // UPDATED: Set to 0.15 to keep it "Middle Down" near the floor
-      // Previous code had this higher at 0.25 for bathing
       if (_activity == PetActivity.bathing) return size.height * 0.15;
       if (_activity == PetActivity.brushing) return size.height * 0.22;
       return size.height * 0.15;
@@ -459,8 +452,6 @@ class _GameRoomScreenState extends State<GameRoomScreen>
 
   double _getPetLeft(Size size) {
     if (_location == GameLocation.bathroom) {
-      // UPDATED: Centered position for the bathroom
-      // (size.width / 2) - 100 centers the 200-width pet container
       return (size.width / 2) - 100;
     }
     if (_location == GameLocation.bedroom &&
