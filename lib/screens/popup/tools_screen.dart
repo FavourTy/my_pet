@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/tools_widgets.dart';
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/tools.dart';
 import 'camera_screen.dart'; // We will create this next
 
 // --- SCREEN 8: USEFUL TOOLS ---
@@ -25,23 +25,63 @@ void showUsefulToolsDialog(BuildContext context) {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("useful tools", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54)),
+                const Text(
+                  "useful tools",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
                 const SizedBox(height: 30),
-                
+
                 // 2x4 Grid
                 Wrap(
                   spacing: 20,
                   runSpacing: 20,
                   alignment: WrapAlignment.center,
                   children: [
-                    ToolGridItem(label: "camera", icon: Icons.camera_alt, onTap: () => _openCamera(context)),
-                    ToolGridItem(label: "weather", icon: Icons.wb_sunny, onTap: () {}),
-                    ToolGridItem(label: "alarm", icon: Icons.alarm, onTap: () {}),
-                    ToolGridItem(label: "number of steps", icon: Icons.directions_walk, onTap: () {}),
-                    ToolGridItem(label: "photo", icon: Icons.photo, onTap: () {}),
-                    ToolGridItem(label: "reminder", icon: Icons.note, onTap: () {}),
-                    ToolGridItem(label: "album", icon: Icons.book, onTap: () {}),
-                    ToolGridItem(label: "SNS post", icon: Icons.share, isRedText: true, onTap: () {}),
+                    ToolGridItem(
+                      label: "camera",
+                      icon: Icons.camera_alt,
+                      onTap: () => _openCamera(context),
+                    ),
+                    ToolGridItem(
+                      label: "weather",
+                      icon: Icons.wb_sunny,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "alarm",
+                      icon: Icons.alarm,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "number of steps",
+                      icon: Icons.directions_walk,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "photo",
+                      icon: Icons.photo,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "reminder",
+                      icon: Icons.note,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "album",
+                      icon: Icons.book,
+                      onTap: () {},
+                    ),
+                    ToolGridItem(
+                      label: "SNS post",
+                      icon: Icons.share,
+                      isRedText: true,
+                      onTap: () {},
+                    ),
                   ],
                 ),
               ],
@@ -49,9 +89,17 @@ void showUsefulToolsDialog(BuildContext context) {
           ),
 
           // X Button
-          Positioned(top: -15, left: 0, child: _buildRoundBtn(Icons.close, () => Navigator.pop(context))),
+          Positioned(
+            top: -15,
+            left: 0,
+            child: _buildRoundBtn(Icons.close, () => Navigator.pop(context)),
+          ),
           // ? Button
-          Positioned(top: -15, right: 0, child: _buildRoundBtn(Icons.question_mark, () {})),
+          Positioned(
+            top: -15,
+            right: 0,
+            child: _buildRoundBtn(Icons.question_mark, () {}),
+          ),
         ],
       ),
     ),
@@ -60,15 +108,15 @@ void showUsefulToolsDialog(BuildContext context) {
 
 void _openCamera(BuildContext context) {
   Navigator.pop(context); // Close dialog
-  Navigator.push(context, MaterialPageRoute(builder: (_) => const CameraScreen()));
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (_) => const CameraScreen()),
+  );
 }
 
 // --- SCREEN 6 & 7: PRESENT BOX (3 TABS) ---
 void showPresentBoxDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) => const _PresentBoxDialog(),
-  );
+  showDialog(context: context, builder: (context) => const _PresentBoxDialog());
 }
 
 class _PresentBoxDialog extends StatefulWidget {
@@ -94,11 +142,21 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
           Container(
             width: double.infinity,
             height: 600, // Fixed height for list
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               children: [
                 const SizedBox(height: 50), // Space for header
-                const Text("present box", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54)),
+                const Text(
+                  "present box",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
                 const SizedBox(height: 20),
 
                 // 3 Main Tabs
@@ -120,11 +178,15 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
                     child: _buildContent(),
                   ),
                 ),
-                
+
                 // Bottom Buttons (Only for Tab 0)
                 if (_currentTab == 0)
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                    padding: const EdgeInsets.only(
+                      bottom: 20,
+                      left: 20,
+                      right: 20,
+                    ),
                     child: Row(
                       children: [
                         Expanded(child: _buildYellowBtn("give a present")),
@@ -133,19 +195,27 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
                       ],
                     ),
                   ),
-                  
+
                 // Bottom Button (Only for Tab 1)
                 if (_currentTab == 1)
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: _buildYellowBtn("send exchange request", width: 200),
                   ),
               ],
             ),
           ),
-          
-          Positioned(top: -15, left: 0, child: _buildRoundBtn(Icons.close, () => Navigator.pop(context))),
-          Positioned(top: -15, right: 0, child: _buildRoundBtn(Icons.question_mark, () {})),
+
+          Positioned(
+            top: -15,
+            left: 0,
+            child: _buildRoundBtn(Icons.close, () => Navigator.pop(context)),
+          ),
+          Positioned(
+            top: -15,
+            right: 0,
+            child: _buildRoundBtn(Icons.question_mark, () {}),
+          ),
         ],
       ),
     );
@@ -174,8 +244,8 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
           const SizedBox(height: 20),
           // List of requests
           PresentTile(
-            title: "Headquarters", 
-            description: "Dummy text about how I got it", 
+            title: "Headquarters",
+            description: "Dummy text about how I got it",
             dateOrLimit: "2025/08/08",
             isRequest: true,
           ),
@@ -196,7 +266,15 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
             color: isActive ? AppColors.primaryYellow : const Color(0xFFE0E0E0),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
           ),
-          child: Text(label, textAlign: TextAlign.center, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isActive ? Colors.black : Colors.grey)),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: isActive ? Colors.black : Colors.grey,
+            ),
+          ),
         ),
       ),
     );
@@ -208,18 +286,36 @@ class _PresentBoxDialogState extends State<_PresentBoxDialog> {
       onTap: () => setState(() => _exchangeSubTab = index),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        color: isActive ? AppColors.primaryYellow.withOpacity(0.5) : Colors.grey[200],
-        child: Text(label, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)),
+        color: isActive
+            ? AppColors.primaryYellow.withOpacity(0.5)
+            : Colors.grey[200],
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 12),
+        ),
       ),
     );
   }
-  
+
   Widget _buildYellowBtn(String label, {double? width}) {
     return Container(
       width: width,
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(color: AppColors.primaryYellow, borderRadius: BorderRadius.circular(30)),
-      child: Center(child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54, fontSize: 12))),
+      decoration: BoxDecoration(
+        color: AppColors.primaryYellow,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+            fontSize: 12,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -229,7 +325,10 @@ Widget _buildRoundBtn(IconData icon, VoidCallback onTap) {
     onTap: onTap,
     child: Container(
       padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(color: AppColors.primaryYellow, shape: BoxShape.circle),
+      decoration: const BoxDecoration(
+        color: AppColors.primaryYellow,
+        shape: BoxShape.circle,
+      ),
       child: Icon(icon, size: 20, color: Colors.black54),
     ),
   );
