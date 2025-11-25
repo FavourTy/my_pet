@@ -11,13 +11,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  // --- STATE ---
+  // --- STATE VARIABLES ---
   double _bgmVolume = 0.7;
   double _envVolume = 0.5;
   double _seVolume = 0.8;
   String _graphicMode = "standard";
-  bool _energySaving = true; // Screen 8 state
-  bool _vibration = true;    // Screen 9 state
+  bool _energySaving = true;
+  bool _vibration = true;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         color: AppColors.primaryYellow,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black54, size: 20),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black54,
+                        size: 20,
+                      ),
                     ),
                   ),
                   const Expanded(
@@ -66,14 +70,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 children: [
-                  SettingsTile(title: "ID display", onTap: () => _showIdDialog(context)),
-                  SettingsTile(title: "sound settings", onTap: () => _showSoundDialog(context)),
-                  SettingsTile(title: "graphic settings", onTap: () => _showGraphicDialog(context)),
-                  SettingsTile(title: "Re-download assets", onTap: () => _showRedownloadDialog(context)),
-                  SettingsTile(title: "clear cache", onTap: () => _showClearCacheDialog(context)),
-                  SettingsTile(title: "Frequently asked questions", onTap: () => _showFaqDialog(context)),
-                  SettingsTile(title: "Energy saving mode", onTap: () => _showEnergyDialog(context)),
-                  SettingsTile(title: "Vibration settings", onTap: () => _showVibrationDialog(context)),
+                  SettingsTile(
+                    title: "ID display",
+                    onTap: () => _showIdDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "sound settings",
+                    onTap: () => _showSoundDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "graphic settings",
+                    onTap: () => _showGraphicDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "Re-download assets",
+                    onTap: () => _showRedownloadDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "clear cache",
+                    onTap: () => _showClearCacheDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "Frequently asked questions",
+                    onTap: () => _showFaqDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "Energy saving mode",
+                    onTap: () => _showEnergyDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "Vibration settings",
+                    onTap: () => _showVibrationDialog(context),
+                  ),
                 ],
               ),
             ),
@@ -95,7 +123,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Aaaa1234", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black54)),
+                const Text(
+                  "Aaaa1234",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
                 const SizedBox(width: 10),
                 const Icon(Icons.copy, size: 20, color: Colors.grey),
               ],
@@ -117,13 +152,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
           icon: Icons.close,
           content: Column(
             children: [
-              const Text("You can choose the sound!", style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "You can choose the sound!",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 10),
-              SoundSlider(label: "BGM", value: _bgmVolume, onChanged: (v) => setState(() => _bgmVolume = v)),
+              SoundSlider(
+                label: "BGM",
+                value: _bgmVolume,
+                onChanged: (v) => setState(() => _bgmVolume = v),
+              ),
               const SizedBox(height: 10),
-              SoundSlider(label: "environmental sounds", value: _envVolume, onChanged: (v) => setState(() => _envVolume = v)),
+              SoundSlider(
+                label: "environmental sounds",
+                value: _envVolume,
+                onChanged: (v) => setState(() => _envVolume = v),
+              ),
               const SizedBox(height: 10),
-              SoundSlider(label: "SE (sound effect)", value: _seVolume, onChanged: (v) => setState(() => _seVolume = v)),
+              SoundSlider(
+                label: "SE (sound effect)",
+                value: _seVolume,
+                onChanged: (v) => setState(() => _seVolume = v),
+              ),
             ],
           ),
         ),
@@ -147,13 +201,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(fontSize: 12, color: Colors.black54),
               ),
               const SizedBox(height: 20),
-              Text("Current setting: ${_graphicMode == 'standard' ? 'Standard' : 'Low Load'}", style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54)),
+              Text(
+                "Current setting: ${_graphicMode == 'standard' ? 'Standard' : 'Low Load'}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
               const SizedBox(height: 20),
               Row(
                 children: [
-                  GraphicOptionBtn(label: "low load", isSelected: _graphicMode == 'low', onTap: () => setState(() => _graphicMode = 'low')),
+                  GraphicOptionBtn(
+                    label: "low load",
+                    isSelected: _graphicMode == 'low',
+                    onTap: () => setState(() => _graphicMode = 'low'),
+                  ),
                   const SizedBox(width: 10),
-                  GraphicOptionBtn(label: "standard", isSelected: _graphicMode == 'standard', onTap: () => setState(() => _graphicMode = 'standard')),
+                  GraphicOptionBtn(
+                    label: "standard",
+                    isSelected: _graphicMode == 'standard',
+                    onTap: () => setState(() => _graphicMode = 'standard'),
+                  ),
                 ],
               ),
             ],
@@ -172,11 +240,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
         icon: Icons.close,
         content: Column(
           children: [
-            const Text("to download the app\nDownload the required data.", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87)),
+            const Text(
+              "to download the app\nDownload the required data.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
             const SizedBox(height: 5),
-            const Text("We strongly recommend downloading in a Wi-Fi environment.", textAlign: TextAlign.center, style: TextStyle(fontSize: 10, color: Colors.black87)),
+            const Text(
+              "We strongly recommend downloading in a Wi-Fi environment.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 10, color: Colors.black87),
+            ),
             const SizedBox(height: 15),
-            const Text("Download size: Approximately 1234MB", style: TextStyle(fontSize: 12, color: Colors.black54)),
+            const Text(
+              "Download size: Approximately 1234MB",
+              style: TextStyle(fontSize: 12, color: Colors.black54),
+            ),
             const SizedBox(height: 20),
             SettingsActionBtn(
               label: "download",
@@ -200,7 +283,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Text(
               "Clearing the cache will free up storage space.\nItems will not disappear during this process.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
             const SizedBox(height: 15),
             const Text(
@@ -229,7 +316,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           icon: Icons.close,
           content: Column(
             children: [
-              const Text("dummy text dummy text dummy text\ndummy text dummy text dummy text", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.black87)),
+              const Text(
+                "dummy text dummy text dummy text\ndummy text dummy text dummy text",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, color: Colors.black87),
+              ),
               const SizedBox(height: 30),
               SettingsToggleRow(
                 label: "Energy saving mode",
@@ -253,7 +344,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           icon: Icons.close,
           content: Column(
             children: [
-              const Text("dummy text dummy text dummy text\ndummy text dummy text dummy text", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.black87)),
+              const Text(
+                "dummy text dummy text dummy text\ndummy text dummy text dummy text",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, color: Colors.black87),
+              ),
               const SizedBox(height: 30),
               SettingsToggleRow(
                 label: "Vibration settings",
@@ -291,34 +386,70 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("• Dummy textDummy textDummy text", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
-                      Text("• Dummy text Dummy text Dummy text", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                      Text(
+                        "• Dummy textDummy textDummy text",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "• Dummy text Dummy text Dummy text",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       SizedBox(height: 8),
-                      Text("Dummy text\n• Dummy textDummy text\n• Dummy textDummy textDummy text", style: TextStyle(fontSize: 10)),
+                      Text(
+                        "Dummy text\n• Dummy textDummy text\n• Dummy textDummy textDummy text",
+                        style: TextStyle(fontSize: 10),
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
-                
-                const Text("FAQ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+
+                const Text(
+                  "FAQ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                ),
                 const SizedBox(height: 10),
-                
+
                 // Small Buttons Grid
-                const Row(children: [FaqSmallBtn(label: "dummy text"), SizedBox(width: 10), FaqSmallBtn(label: "dummy text")]),
+                const Row(
+                  children: [
+                    FaqSmallBtn(label: "dummy text"),
+                    SizedBox(width: 10),
+                    FaqSmallBtn(label: "dummy text"),
+                  ],
+                ),
                 const SizedBox(height: 10),
-                const Row(children: [FaqSmallBtn(label: "dummy text"), SizedBox(width: 10), FaqSmallBtn(label: "dummy text")]),
-                
+                const Row(
+                  children: [
+                    FaqSmallBtn(label: "dummy text"),
+                    SizedBox(width: 10),
+                    FaqSmallBtn(label: "dummy text"),
+                  ],
+                ),
+
                 const SizedBox(height: 20),
-                const Text("■ dummy text", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                const Text(
+                  "■ dummy text",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 5),
-                
+
                 // Expandable Tiles
                 const FaqTile(title: "dummy text dummy text"),
                 const FaqTile(title: "dummy text dummy text"),
                 const FaqTile(title: "dummy text dummy text"),
-                
+
                 const SizedBox(height: 15),
-                const Text("■ dummy text", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                const Text(
+                  "■ dummy text",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 5),
                 const FaqTile(title: "dummy text dummy text"),
                 const FaqTile(title: "dummy text dummy text"),
