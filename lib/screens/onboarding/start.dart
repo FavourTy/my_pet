@@ -110,7 +110,7 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           
-          // 4. Company Name (Bottom Left)
+         
           const Positioned(
             bottom: 20,
             left: 20,
