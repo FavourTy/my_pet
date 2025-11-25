@@ -231,6 +231,132 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _showFaqDetailDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(20),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Center(
+                    child: Text(
+                      "Frequently asked questions",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    "dummy text dummy text dummy text dummy text",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Search/Input Box
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      "dummy text",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                  const Divider(height: 30),
+
+                  const Text(
+                    "dummy text dummy text dummy text\ndummy text dummy text dummy text",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Helpful? Box
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Was this article helpful?",
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(child: _buildFaqBtn("yes", false)),
+                            const SizedBox(width: 10),
+                            Expanded(child: _buildFaqBtn("No", true)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Center(
+                    child: Text(
+                      "Contact customer support directly",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Center(child: _buildFaqBtn("Inquiry", true, width: 150)),
+                  const SizedBox(height: 20),
+                  const Center(
+                    child: Text(
+                      "Return to home",
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: -15,
+              left: -10,
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: AppColors.primaryYellow,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 20,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // --- SCREEN 6: RE-DOWNLOAD ASSETS ---
   void _showRedownloadDialog(BuildContext context) {
     showDialog(
@@ -357,6 +483,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFaqBtn(String label, bool isYellow, {double? width}) {
+    return Container(
+      width: width,
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: isYellow ? AppColors.primaryYellow : Colors.white,
+        border: isYellow ? null : Border.all(color: AppColors.primaryYellow),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ),
     );
