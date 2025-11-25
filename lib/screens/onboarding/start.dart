@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import 'settings_screen.dart';
+import 'package:my_pet/screens/settings/settings_screen.dart';
+import 'package:my_pet/utils/colors.dart';
+
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});

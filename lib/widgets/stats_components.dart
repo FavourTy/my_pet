@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
+
 
 // 1. The Dark Screen Shell (Handles Background & Back Button)
 class DarkStatsScaffold extends StatelessWidget {

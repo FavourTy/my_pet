@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/dialog_widgets.dart'; // Reusing your TabbedDialog
-import '../widgets/task_widgets.dart';   // The new widgets above
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/dialog_widgets.dart';
+import 'package:my_pet/widgets/tasks.dart';
 
 // ============================================================================
 // SCREEN 1 & 2: WORK TASKS DIALOG
@@ -13,7 +13,7 @@ void showWorkTasksDialog(BuildContext context) {
       tab1Label: "Earned reward tasks updated daily",
       tab2Label: "Earned reward tasks for each item",
       // We don't pass specific content here because TabbedDialog is generic.
-      // I will create a specific widget below to handle the content switching 
+      // I will create a specific widget below to handle the content switching
       // to match your exact layout request.
       tab1Content: _DailyTasksGrid(),
       tab2Content: _ItemTasksList(),
@@ -31,7 +31,7 @@ class _DailyTasksGrid extends StatelessWidget {
         // Top Large Card
         const SizedBox(height: 160, child: TaskGridCard(isLarge: true)),
         const SizedBox(height: 10),
-        
+
         // Grid of Small Cards
         GridView.builder(
           shrinkWrap: true,
@@ -87,17 +87,23 @@ void showEventStatusDialog(BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 10),
-                  const Text("Event status", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "Event status",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 10),
-                  
-                  const Text("event name", style: TextStyle(fontSize: 16, color: Colors.grey)),
+
+                  const Text(
+                    "event name",
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
                   const Text(
                     "dummy text dummy text dummy text\nEvent period: 2025/08/08 00:00 - 2025/08/08 00:00",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10, color: Colors.grey),
                   ),
                   const SizedBox(height: 15),
-                  
+
                   // Eye Catch Banner
                   Container(
                     height: 100,
@@ -106,10 +112,15 @@ void showEventStatusDialog(BuildContext context) {
                       color: const Color(0xFFD9D9D9),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Center(child: Text("Event eye catch", style: TextStyle(color: Colors.grey))),
+                    child: const Center(
+                      child: Text(
+                        "Event eye catch",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 15),
-                  
+
                   // Progress Bar
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -117,10 +128,12 @@ void showEventStatusDialog(BuildContext context) {
                       value: 0.15,
                       minHeight: 12,
                       backgroundColor: Color(0xFFEEEEEE), // Very light grey
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryYellow),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.primaryYellow,
+                      ),
                     ),
                   ),
-                  
+
                   // Steps (Gifts)
                   const SizedBox(height: 5),
                   Row(
@@ -133,11 +146,17 @@ void showEventStatusDialog(BuildContext context) {
                       EventStepIcon(),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 20),
-                  const Align(alignment: Alignment.centerLeft, child: Text("Rewards to be earned", style: TextStyle(fontSize: 12, color: Colors.grey))),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Rewards to be earned",
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  
+
                   // Reward List
                   _buildRewardRow(true),
                   _buildRewardRow(false),
@@ -147,26 +166,38 @@ void showEventStatusDialog(BuildContext context) {
               ),
             ),
           ),
-          
+
           // X Button
           Positioned(
-            top: -15, left: 0,
+            top: -15,
+            left: 0,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Container(
                 padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(color: AppColors.primaryYellow, shape: BoxShape.circle),
+                decoration: const BoxDecoration(
+                  color: AppColors.primaryYellow,
+                  shape: BoxShape.circle,
+                ),
                 child: const Icon(Icons.close, color: Colors.black54, size: 20),
               ),
             ),
           ),
           // ? Button
           Positioned(
-            top: -15, right: 0,
+            top: -15,
+            right: 0,
             child: Container(
               padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(color: AppColors.primaryYellow, shape: BoxShape.circle),
-              child: const Icon(Icons.question_mark, color: Colors.black54, size: 20),
+              decoration: const BoxDecoration(
+                color: AppColors.primaryYellow,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.question_mark,
+                color: Colors.black54,
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -180,7 +211,14 @@ Widget _buildRewardRow(bool isAchieved) {
     padding: const EdgeInsets.only(bottom: 15),
     child: Row(
       children: [
-        Container(width: 50, height: 50, decoration: BoxDecoration(color: const Color(0xFFD9D9D9), borderRadius: BorderRadius.circular(8))),
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: const Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
@@ -193,7 +231,7 @@ Widget _buildRewardRow(bool isAchieved) {
           ),
         ),
         SmallActionBtn(
-          label: isAchieved ? "receive" : "Not achieved", 
+          label: isAchieved ? "receive" : "Not achieved",
           isActive: isAchieved,
         ),
       ],

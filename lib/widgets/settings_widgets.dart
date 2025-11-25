@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
+
 
 // 1. The Grey Settings Button (Existing)
 class SettingsTile extends StatelessWidget {
@@ -360,144 +361,144 @@ class FaqSmallBtn extends StatelessWidget {
 // --- NEW WIDGETS FOR SCREENS 6-10 ---
 
 // 5. Yellow Action Button (For "download", "clear cache")
-class SettingsActionBtn extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
+// class SettingsActionBtn extends StatelessWidget {
+//   final String label;
+//   final VoidCallback onTap;
 
-  const SettingsActionBtn({
-    super.key,
-    required this.label,
-    required this.onTap,
-  });
+//   const SettingsActionBtn({
+//     super.key,
+//     required this.label,
+//     required this.onTap,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 200,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: AppColors.primaryYellow,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Container(
+//         width: 200,
+//         padding: const EdgeInsets.symmetric(vertical: 12),
+//         decoration: BoxDecoration(
+//           color: AppColors.primaryYellow,
+//           borderRadius: BorderRadius.circular(30),
+//         ),
+//         child: Center(
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//               color: Colors.black54,
+//               fontWeight: FontWeight.bold,
+//               fontSize: 14,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // 6. Toggle Switch Row (For "Energy saving", "Vibration")
-class SettingsToggleRow extends StatelessWidget {
-  final String label;
-  final bool value;
-  final ValueChanged<bool> onChanged;
+// class SettingsToggleRow extends StatelessWidget {
+//   final String label;
+//   final bool value;
+//   final ValueChanged<bool> onChanged;
 
-  const SettingsToggleRow({
-    super.key,
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
+//   const SettingsToggleRow({
+//     super.key,
+//     required this.label,
+//     required this.value,
+//     required this.onChanged,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-            fontSize: 14,
-          ),
-        ),
-        Transform.scale(
-          scale: 0.8,
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: AppColors.primaryYellow,
-            activeTrackColor: AppColors.primaryYellow.withOpacity(0.3),
-            inactiveThumbColor: Colors.grey[300],
-            inactiveTrackColor: Colors.grey[200],
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Text(
+//           label,
+//           style: const TextStyle(
+//             fontWeight: FontWeight.bold,
+//             color: Colors.black87,
+//             fontSize: 14,
+//           ),
+//         ),
+//         Transform.scale(
+//           scale: 0.8,
+//           child: Switch(
+//             value: value,
+//             onChanged: onChanged,
+//             activeColor: AppColors.primaryYellow,
+//             activeTrackColor: AppColors.primaryYellow.withOpacity(0.3),
+//             inactiveThumbColor: Colors.grey[300],
+//             inactiveTrackColor: Colors.grey[200],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
-// 7. FAQ Tile (Grey box with yellow indicator)
-class FaqTile extends StatelessWidget {
-  final String title;
+// // 7. FAQ Tile (Grey box with yellow indicator)
+// class FaqTile extends StatelessWidget {
+//   final String title;
 
-  const FaqTile({super.key, required this.title});
+//   const FaqTile({super.key, required this.title});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 12, color: Colors.black87),
-            ),
-          ),
-          Container(
-            width: 8,
-            height: 8,
-            decoration: const BoxDecoration(
-              color: AppColors.primaryYellow,
-              shape: BoxShape.rectangle, 
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.only(bottom: 10),
+//       padding: const EdgeInsets.all(12),
+//       decoration: BoxDecoration(
+//         color: const Color(0xFFD9D9D9),
+//         borderRadius: BorderRadius.circular(8),
+//       ),
+//       child: Row(
+//         children: [
+//           Expanded(
+//             child: Text(
+//               title,
+//               style: const TextStyle(fontSize: 12, color: Colors.black87),
+//             ),
+//           ),
+//           Container(
+//             width: 8,
+//             height: 8,
+//             decoration: const BoxDecoration(
+//               color: AppColors.primaryYellow,
+//               shape: BoxShape.rectangle, 
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-// 8. Small FAQ Button (White outline)
-class FaqSmallBtn extends StatelessWidget {
-  final String label;
+// // 8. Small FAQ Button (White outline)
+// class FaqSmallBtn extends StatelessWidget {
+//   final String label;
   
-  const FaqSmallBtn({super.key, required this.label});
+//   const FaqSmallBtn({super.key, required this.label});
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
-            const Icon(Icons.arrow_drop_down, size: 14, color: Colors.grey),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: Container(
+//         padding: const EdgeInsets.symmetric(vertical: 8),
+//         decoration: BoxDecoration(
+//           border: Border.all(color: Colors.grey),
+//           borderRadius: BorderRadius.circular(6),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: [
+//             Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+//             const Icon(Icons.arrow_drop_down, size: 14, color: Colors.grey),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

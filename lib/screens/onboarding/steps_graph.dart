@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/stats_widgets.dart';
+import 'package:my_pet/widgets/stats_components.dart';
 
 class StepsGraphScreen extends StatefulWidget {
   const StepsGraphScreen({super.key});
@@ -25,14 +25,24 @@ class _StepsGraphScreenState extends State<StepsGraphScreen> {
           const SizedBox(height: 20),
 
           // 2. Big Total Text
-          const Text("total", style: TextStyle(color: Colors.white70, fontSize: 10)),
+          const Text(
+            "total",
+            style: TextStyle(color: Colors.white70, fontSize: 10),
+          ),
           const SizedBox(height: 5),
           const Text(
             "12345 steps",
-            style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.normal),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.normal,
+            ),
           ),
-          const Text("2027/08/21~", style: TextStyle(color: Colors.white54, fontSize: 10)),
-          
+          const Text(
+            "2027/08/21~",
+            style: TextStyle(color: Colors.white54, fontSize: 10),
+          ),
+
           const Spacer(),
 
           // 3. The Chart
@@ -44,7 +54,12 @@ class _StepsGraphScreenState extends State<StepsGraphScreen> {
                 BarData("day", 5000, points: "123pt"),
                 BarData("moon", 9000, hasBadge: true, points: "123pt"),
                 BarData("fire", 13000, hasBadge: true, points: "123pt"),
-                BarData("water", 13000, isHighlighted: true, points: "123pt"), // Highlighted bar
+                BarData(
+                  "water",
+                  13000,
+                  isHighlighted: true,
+                  points: "123pt",
+                ), // Highlighted bar
                 BarData("tree", 12000, points: "123pt"),
                 BarData("money", 13500, hasBadge: true, points: "123pt"),
                 BarData("soil", 10000, points: "123pt"),
@@ -68,15 +83,28 @@ class _StepsGraphScreenState extends State<StepsGraphScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text("2027/08/21~08/31", style: TextStyle(fontSize: 8, color: Colors.black54)),
-                    Text("Points earned", style: TextStyle(fontSize: 14, color: Colors.black87)),
+                    Text(
+                      "2027/08/21~08/31",
+                      style: TextStyle(fontSize: 8, color: Colors.black54),
+                    ),
+                    Text(
+                      "Points earned",
+                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                    ),
                   ],
                 ),
-                const Text("100 points", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54)),
+                const Text(
+                  "100 points",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
               ],
             ),
           ),
-          
+
           const SizedBox(height: 20),
         ],
       ),

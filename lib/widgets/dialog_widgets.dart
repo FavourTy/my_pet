@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import 'common_widgets.dart'; // For CircularActionButton
+import 'package:my_pet/utils/colors.dart';
 
 // 1. Generic Tabbed Dialog (Handles the Yellow/Grey tabs)
 class TabbedDialog extends StatefulWidget {
@@ -8,7 +7,7 @@ class TabbedDialog extends StatefulWidget {
   final String tab2Label;
   final Widget tab1Content;
   final Widget tab2Content;
-  final IconData icon;
+  final IconData? icon;
 
   const TabbedDialog({
     super.key,
@@ -16,7 +15,7 @@ class TabbedDialog extends StatefulWidget {
     required this.tab2Label,
     required this.tab1Content,
     required this.tab2Content,
-    required this.icon,
+    this.icon,
   });
 
   @override
@@ -47,7 +46,6 @@ class _TabbedDialogState extends State<TabbedDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 20), // Space for the floating icon
-                
                 // Tabs Row
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -58,11 +56,13 @@ class _TabbedDialogState extends State<TabbedDialog> {
                     ],
                   ),
                 ),
-                
+
                 // Content Area
                 Padding(
                   padding: const EdgeInsets.all(20),
-                  child: _currentTab == 0 ? widget.tab1Content : widget.tab2Content,
+                  child: _currentTab == 0
+                      ? widget.tab1Content
+                      : widget.tab2Content,
                 ),
               ],
             ),
@@ -95,7 +95,11 @@ class _TabbedDialogState extends State<TabbedDialog> {
                 color: AppColors.primaryYellow,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.question_mark, color: Colors.black54, size: 20),
+              child: const Icon(
+                Icons.question_mark,
+                color: Colors.black54,
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -155,63 +159,112 @@ class StepCounterWidget extends StatelessWidget {
                   value: 0.15, // 1234 / 8000
                   strokeWidth: 8,
                   backgroundColor: Colors.grey[300],
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.black54),
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    Colors.black54,
+                  ),
                 ),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
-                  Text("today", style: TextStyle(fontSize: 10, color: Colors.grey)),
+                  Text(
+                    "today",
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
                   SizedBox(height: 4),
-                  Text("1234 steps", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black54)),
-                  Text("/8000", style: TextStyle(fontSize: 14, color: Colors.grey)),
+                  Text(
+                    "1234 steps",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  Text(
+                    "/8000",
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
                 ],
               ),
             ],
           ),
         ),
-        
+
         // Stats Row
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildStat("123", "m"),
-            _buildStat("123", "Kcal"),
-          ],
+          children: [_buildStat("123", "m"), _buildStat("123", "Kcal")],
         ),
-        
+
         const SizedBox(height: 20),
-        
+
         // Achievement Bar
-        const Align(alignment: Alignment.centerLeft, child: Text("Achievement bonus", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold))),
+        const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Achievement bonus",
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ),
         const SizedBox(height: 5),
         Stack(
           children: [
-            Container(height: 8, decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(4))),
-            FractionallySizedBox(widthFactor: 0.6, child: Container(height: 8, decoration: BoxDecoration(color: AppColors.primaryYellow, borderRadius: BorderRadius.circular(4)))),
+            Container(
+              height: 8,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            FractionallySizedBox(
+              widthFactor: 0.6,
+              child: Container(
+                height: 8,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryYellow,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ),
           ],
         ),
-        
+
         const SizedBox(height: 20),
-        
+
         // Grey Info Box
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: const Color(0xFFE0E0E0), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE0E0E0),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text("Points to be earned today", style: TextStyle(fontSize: 10)),
-              Text("100 points", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text(
+                "100 points",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
         ),
-        
+
         const SizedBox(height: 20),
-        const Text("<Convert to points>", style: TextStyle(fontSize: 12, color: Colors.grey)),
-        const Text("123+100 → 223(+100)", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const Text(
+          "<Convert to points>",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const Text(
+          "123+100 → 223(+100)",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 10),
-        CircularActionButton(label: "convert", onTap: () {}, isWarning: false), // Reused widget
+        CircularActionButton(
+          label: "convert",
+          onTap: () {},
+          isWarning: false,
+        ),
       ],
     );
   }
@@ -234,12 +287,29 @@ class PointsListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text("<Current points>", style: TextStyle(fontSize: 12, color: Colors.grey)),
-        const Text("12345", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black54)),
+        const Text(
+          "<Current points>",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const Text(
+          "12345",
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+        ),
         const Divider(height: 30),
-        const Text("Convert points to coins", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black54)),
+        const Text(
+          "Convert points to coins",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: Colors.black54,
+          ),
+        ),
         const SizedBox(height: 20),
-        
+
         _buildConvertRow("10 -> 20"),
         _buildConvertRow("10 -> 20"),
         _buildConvertRow("10 -> 20"),
@@ -254,7 +324,10 @@ class PointsListWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: const TextStyle(fontSize: 16, color: Colors.black54)),
+          Text(
+            text,
+            style: const TextStyle(fontSize: 16, color: Colors.black54),
+          ),
           GestureDetector(
             onTap: () {},
             child: Container(
@@ -263,7 +336,14 @@ class PointsListWidget extends StatelessWidget {
                 color: AppColors.primaryYellow,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text("convert", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black54)),
+              child: const Text(
+                "convert",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
             ),
           ),
         ],
@@ -281,30 +361,52 @@ class LoveYearsWidget extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        const Text("<Current number of years of love>", style: TextStyle(fontSize: 10, color: Colors.grey)),
-        const Text("Thank you for your love", style: TextStyle(fontSize: 10, color: Colors.grey)),
+        const Text(
+          "<Current number of years of love>",
+          style: TextStyle(fontSize: 10, color: Colors.grey),
+        ),
+        const Text(
+          "Thank you for your love",
+          style: TextStyle(fontSize: 10, color: Colors.grey),
+        ),
         const SizedBox(height: 10),
-        const Text("12 years 1 month", style: TextStyle(fontSize: 28, color: Colors.black54)),
+        const Text(
+          "12 years 1 month",
+          style: TextStyle(fontSize: 28, color: Colors.black54),
+        ),
         const Divider(height: 40),
-        const Text("<Next love years reward>", style: TextStyle(fontSize: 12, color: Colors.grey)),
+        const Text(
+          "<Next love years reward>",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 60, height: 60,
-              decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             const SizedBox(width: 15),
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("dummy text dummy text", style: TextStyle(fontSize: 12, color: Colors.black54)),
-                Text("x1", style: TextStyle(fontSize: 12, color: Colors.black54)),
+                Text(
+                  "dummy text dummy text",
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                ),
+                Text(
+                  "x1",
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                ),
               ],
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -319,13 +421,25 @@ class HPInfoWidget extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        const Text("<Current HP>", style: TextStyle(fontSize: 12, color: Colors.grey)),
-        const Text("123/1000", style: TextStyle(fontSize: 32, color: Colors.black54)),
+        const Text(
+          "<Current HP>",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const Text(
+          "123/1000",
+          style: TextStyle(fontSize: 32, color: Colors.black54),
+        ),
         const Divider(height: 40),
-        const Text("<HP recovery>", style: TextStyle(fontSize: 12, color: Colors.grey)),
-        const Text("123+100 → 223(+100)", style: TextStyle(fontSize: 16, color: Colors.black54)),
+        const Text(
+          "<HP recovery>",
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const Text(
+          "123+100 → 223(+100)",
+          style: TextStyle(fontSize: 16, color: Colors.black54),
+        ),
         const SizedBox(height: 20),
-        
+
         // Using the common circular button but overriding size in a row or just mimicking style
         GestureDetector(
           onTap: () {},
@@ -336,7 +450,15 @@ class HPInfoWidget extends StatelessWidget {
               color: AppColors.primaryYellow,
               borderRadius: BorderRadius.circular(30),
             ),
-            child: const Center(child: Text("Recover HP", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54))),
+            child: const Center(
+              child: Text(
+                "Recover HP",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -344,34 +466,30 @@ class HPInfoWidget extends StatelessWidget {
   }
 }
 
-
-
-
-//calling the function in hud 
-
+//calling the function in hud
 
 void _showStepsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => const TabbedDialog(
-        tab1Label: "number of steps",
-        tab2Label: "points",
-        icon: Icons.close,
-        tab1Content: StepCounterWidget(),
-        tab2Content: PointsListWidget(),
-      ),
-    );
-  }
+  showDialog(
+    context: context,
+    builder: (context) => const TabbedDialog(
+      tab1Label: "number of steps",
+      tab2Label: "points",
+      icon: Icons.close,
+      tab1Content: StepCounterWidget(),
+      tab2Content: PointsListWidget(),
+    ),
+  );
+}
 
-  void _showLoveDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => const TabbedDialog(
-        tab1Label: "years of love",
-        tab2Label: "HP information",
-        icon: Icons.close,
-        tab1Content: LoveYearsWidget(),
-        tab2Content: HPInfoWidget(),
-      ),
-    );
-  }
+void _showLoveDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => const TabbedDialog(
+      tab1Label: "years of love",
+      tab2Label: "HP information",
+      icon: Icons.close,
+      tab1Content: LoveYearsWidget(),
+      tab2Content: HPInfoWidget(),
+    ),
+  );
+}

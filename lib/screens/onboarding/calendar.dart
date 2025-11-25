@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/stats_widgets.dart';
+import 'package:my_pet/widgets/stats_components.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -8,15 +8,23 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DarkStatsScaffold(
       title: "2027/08/21",
-      child: SingleChildScrollView( // Allow scrolling for long calendars
+      child: SingleChildScrollView(
+        // Allow scrolling for long calendars
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("October", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              const Text(
+                "October",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
               const SizedBox(height: 20),
-              
+
               // Grid of Days
               GridView.builder(
                 shrinkWrap: true,
@@ -32,7 +40,7 @@ class CalendarScreen extends StatelessWidget {
                   final dayNum = index + 1;
                   // Mock data logic: Highlight specific days like the image
                   final bool hasBadge = [2, 9, 16, 23, 30].contains(dayNum);
-                  
+
                   return CalendarDayTile(
                     day: "$dayNum",
                     hasBadge: hasBadge,
@@ -40,11 +48,18 @@ class CalendarScreen extends StatelessWidget {
                   );
                 },
               ),
-              
+
               const SizedBox(height: 20),
-              const Text("November", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              const Text(
+                "November",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
               const SizedBox(height: 20),
-              
+
               // Another Grid for next month (Mocking simplified view)
               GridView.builder(
                 shrinkWrap: true,

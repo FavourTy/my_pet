@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
-// 1. Small Yellow Action Button (GET, receive, etc.)
 class SmallActionBtn extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
