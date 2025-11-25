@@ -343,3 +343,35 @@ class HPInfoWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//calling the function in hud 
+
+
+void _showStepsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "number of steps",
+        tab2Label: "points",
+        icon: Icons.close,
+        tab1Content: StepCounterWidget(),
+        tab2Content: PointsListWidget(),
+      ),
+    );
+  }
+
+  void _showLoveDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "years of love",
+        tab2Label: "HP information",
+        icon: Icons.close,
+        tab1Content: LoveYearsWidget(),
+        tab2Content: HPInfoWidget(),
+      ),
+    );
+  }
