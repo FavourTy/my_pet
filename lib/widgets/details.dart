@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
-// 1. Add Photo Button (Screen 33)
 class AddPhotoBtn extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -23,7 +22,13 @@ class AddPhotoBtn extends StatelessWidget {
           children: const [
             Icon(Icons.add, color: AppColors.primaryYellow, size: 20),
             SizedBox(width: 10),
-            Text("select photo", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            Text(
+              "select photo",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
@@ -72,8 +77,19 @@ class DropdownPill extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
-          const Icon(Icons.keyboard_arrow_down, color: AppColors.primaryYellow, size: 16),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+          const Icon(
+            Icons.keyboard_arrow_down,
+            color: AppColors.primaryYellow,
+            size: 16,
+          ),
         ],
       ),
     );
@@ -113,7 +129,9 @@ class LockedContentTile extends StatelessWidget {
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
               image: DecorationImage(
-                image: NetworkImage('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=400'),
+                image: NetworkImage(
+                  'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=400',
+                ),
                 fit: BoxFit.cover,
               ),
             ),
@@ -124,7 +142,14 @@ class LockedContentTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (lockText != null)
-                          Text(lockText!, style: const TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold)),
+                          Text(
+                            lockText!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         const SizedBox(height: 5),
                         const Icon(Icons.lock, color: Colors.white, size: 24),
                       ],
@@ -132,7 +157,7 @@ class LockedContentTile extends StatelessWidget {
                   )
                 : null,
           ),
-          
+
           // Text Content
           Expanded(
             child: Padding(
@@ -140,16 +165,36 @@ class LockedContentTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 10)),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(color: Colors.white70, fontSize: 10),
+                  ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(isLocked ? Icons.favorite_border : Icons.favorite, size: 14, color: AppColors.primaryYellow),
+                      Icon(
+                        isLocked ? Icons.favorite_border : Icons.favorite,
+                        size: 14,
+                        color: AppColors.primaryYellow,
+                      ),
                       const SizedBox(width: 4),
-                      Text(isLocked ? "Unopened" : "Viewed", style: const TextStyle(color: Colors.white, fontSize: 10)),
+                      Text(
+                        isLocked ? "Unopened" : "Viewed",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -192,10 +237,21 @@ class ActionPill extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 14, color: isOutline ? Colors.white : Colors.black54),
+              Icon(
+                icon,
+                size: 14,
+                color: isOutline ? Colors.white : Colors.black54,
+              ),
               const SizedBox(width: 4),
             ],
-            Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isOutline ? Colors.white : Colors.black54)),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: isOutline ? Colors.white : Colors.black54,
+              ),
+            ),
           ],
         ),
       ),
