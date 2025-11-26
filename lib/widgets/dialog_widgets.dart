@@ -497,9 +497,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/utils/colors.dart';
 
-// ============================================================================
-// 1. GENERIC TABBED DIALOG WRAPPER (Handles the Yellow/Grey tabs & Close btn)
-// ============================================================================
+
 class TabbedDialog extends StatefulWidget {
   final String tab1Label;
   final String tab2Label;
@@ -788,7 +786,7 @@ class StepCounterWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        CircularActionButton(label: "convert", onTap: () {}, isWarning: false),
+        // CircularActionButton(label: "convert", onTap: () {}, isWarning: false),
       ],
     );
   }

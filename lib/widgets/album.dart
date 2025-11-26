@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/utils/colors.dart';
-import '../theme/app_theme.dart';
+
 
 // 1. Simple Photo Tile (Square)
 class PhotoTile extends StatelessWidget {
