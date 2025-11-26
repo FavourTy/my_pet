@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_pet/utils/colors.dart';
 import 'package:my_pet/widgets/settings_widgets.dart';
 
+import '../../widgets/dialog_widgets.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -17,6 +19,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _graphicMode = "standard";
   bool _energySaving = true;
   bool _vibration = true;
+  // Call this for Screen 11 (from the FAQ list)
+  void _showFaqDetail(BuildContext context) {
+    showDialog(context: context, builder: (_) => const FaqDetailDialog());
+  }
+
+  // Call this for Screen 12 & 13 (Love/HP) - Connect to Heart Icon on Home Screen
+  void showLoveDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "years of love",
+        tab2Label: "HP information",
+        tab1Content: LoveYearsWidget(),
+        tab2Content: HPInfoWidget(),
+      ),
+    );
+  }
+
+  // Call this for Screen 14 & 16 (Steps/Points) - Connect to Steps Icon on Home Screen
+  void showStepsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "number of steps",
+        tab2Label: "points",
+        tab1Content: StepCounterWidget(),
+        tab2Content: PointsListWidget(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
