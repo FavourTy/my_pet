@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/stats_widgets.dart'; // Reusing DarkStatsScaffold
-import '../widgets/creation_widgets.dart'; // New widgets
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/creation.dart';
+import 'package:my_pet/widgets/stats_components.dart';
 
 class ListCreationScreen extends StatefulWidget {
   const ListCreationScreen({super.key});
@@ -17,23 +17,30 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
   Widget build(BuildContext context) {
     return DarkStatsScaffold(
       title: "List Creation",
-      // Custom Header Actions (Menu dots)
-      // We override the default scaffold slightly or just add the dots here if we customized DarkStatsScaffold. 
-      // For now, assuming basic structure.
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 1. Header Input
-            const CreationInputRow(icon: Icons.label, hintText: "pet ribs", isHeader: true),
+            const CreationInputRow(
+              icon: Icons.label,
+              hintText: "pet ribs",
+              isHeader: true,
+            ),
             const SizedBox(height: 30),
 
             // 2. Description Input
-            const Text("dummy text dummy text", style: TextStyle(color: Colors.white54, fontSize: 12)),
+            const Text(
+              "dummy text dummy text",
+              style: TextStyle(color: Colors.white54, fontSize: 12),
+            ),
             const SizedBox(height: 10),
-            const CreationInputRow(icon: Icons.notes, hintText: "dummy text dummy text"),
-            
+            const CreationInputRow(
+              icon: Icons.notes,
+              hintText: "dummy text dummy text",
+            ),
+
             const SizedBox(height: 20),
 
             // 3. Subtasks Tree
@@ -43,26 +50,41 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
                 // Tree Line Visualization
                 Column(
                   children: [
-                    const Icon(Icons.subdirectory_arrow_right, color: AppColors.primaryYellow, size: 20),
+                    const Icon(
+                      Icons.subdirectory_arrow_right,
+                      color: AppColors.primaryYellow,
+                      size: 20,
+                    ),
                     Container(width: 1, height: 60, color: Colors.white24),
                   ],
                 ),
                 const SizedBox(width: 10),
-                
+
                 // Subtask Inputs
                 Expanded(
                   child: Column(
                     children: [
-                      const CreationInputRow(icon: Icons.radio_button_unchecked, hintText: "dummy text dummy text"),
+                      const CreationInputRow(
+                        icon: Icons.radio_button_unchecked,
+                        hintText: "dummy text dummy text",
+                      ),
                       const SizedBox(height: 5),
                       const Padding(
-                        padding: EdgeInsets.only(left: 26), // Indent description
-                        child: Text("dummy text dummy text", style: TextStyle(color: Colors.white38, fontSize: 10)),
+                        padding: EdgeInsets.only(
+                          left: 26,
+                        ), // Indent description
+                        child: Text(
+                          "dummy text dummy text",
+                          style: TextStyle(color: Colors.white38, fontSize: 10),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {}, // Add logic
-                        child: const Text("Add subtask", style: TextStyle(color: Colors.white54, fontSize: 12)),
+                        child: const Text(
+                          "Add subtask",
+                          style: TextStyle(color: Colors.white54, fontSize: 12),
+                        ),
                       ),
                     ],
                   ),
@@ -74,20 +96,20 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
 
             // 4. Settings Buttons
             CreationSettingBtn(
-              icon: Icons.history, 
-              label: "Alert date and time", 
+              icon: Icons.history,
+              label: "Alert date and time",
               value: "2027/08/21 14:10",
               onTap: () => _showDatePicker(context),
             ),
             CreationSettingBtn(
-              icon: Icons.repeat, 
-              label: "Repeat settings", 
+              icon: Icons.repeat,
+              label: "Repeat settings",
               value: "Wednesday",
               onTap: () {}, // Go to repeat screen (Screen 19 logic)
             ),
             CreationSettingBtn(
-              icon: Icons.notifications, 
-              label: "notification", 
+              icon: Icons.notifications,
+              label: "notification",
               isToggle: true,
               toggleValue: _notifications,
               onTap: () => setState(() => _notifications = !_notifications),
@@ -122,10 +144,20 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
                   child: const CircleAvatar(
                     backgroundColor: AppColors.primaryYellow,
                     radius: 15,
-                    child: Icon(Icons.arrow_back, size: 16, color: Colors.black54),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 16,
+                      color: Colors.black54,
+                    ),
                   ),
                 ),
-                const Text("Date and Time settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                const Text(
+                  "Date and Time settings",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const Icon(Icons.more_horiz, color: Colors.white54),
               ],
             ),
@@ -135,7 +167,9 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
             Expanded(
               child: GridView.builder(
                 itemCount: 31,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 7,
+                ),
                 itemBuilder: (context, index) {
                   final day = index + 1;
                   final isSelected = day == 21;
@@ -143,8 +177,12 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
                     child: Text(
                       "$day",
                       style: TextStyle(
-                        color: isSelected ? AppColors.primaryYellow : Colors.white,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected
+                            ? AppColors.primaryYellow
+                            : Colors.white,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                     ),
                   );
@@ -154,22 +192,28 @@ class _ListCreationScreenState extends State<ListCreationScreen> {
 
             // Time Setting
             CreationSettingBtn(
-              icon: Icons.history, 
-              label: "time", 
+              icon: Icons.history,
+              label: "time",
               value: "14:10",
-              onTap: () {}, 
+              onTap: () {},
             ),
             CreationSettingBtn(
-              icon: Icons.repeat, 
-              label: "Repeat settings", 
+              icon: Icons.repeat,
+              label: "Repeat settings",
               value: "Wednesday",
               onTap: () {},
             ),
-            
+
             const SizedBox(height: 10),
             const Align(
               alignment: Alignment.centerRight,
-              child: Text("Completed", style: TextStyle(color: AppColors.primaryYellow, fontWeight: FontWeight.bold)),
+              child: Text(
+                "Completed",
+                style: TextStyle(
+                  color: AppColors.primaryYellow,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
           ],

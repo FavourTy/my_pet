@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/creation_widgets.dart'; // Reuse AlbumFolderCard
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/creation.dart';
 
 class AlbumFoldersScreen extends StatelessWidget {
   const AlbumFoldersScreen({super.key});
@@ -22,11 +22,24 @@ class AlbumFoldersScreen extends StatelessWidget {
                     child: const CircleAvatar(
                       backgroundColor: AppColors.primaryYellow,
                       radius: 15,
-                      child: Icon(Icons.arrow_back, size: 16, color: Colors.black54),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 16,
+                        color: Colors.black54,
+                      ),
                     ),
                   ),
                   const Expanded(
-                    child: Center(child: Text("album", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16))),
+                    child: Center(
+                      child: Text(
+                        "album",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 30), // Balance header
                 ],
@@ -53,12 +66,22 @@ class AlbumFoldersScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("album", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  const Text(
+                    "album",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                   Row(
                     children: const [
                       Icon(Icons.sort, color: Colors.white70, size: 16),
                       SizedBox(width: 5),
-                      Text("Sort by title", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                      Text(
+                        "Sort by title",
+                        style: TextStyle(color: Colors.white70, fontSize: 12),
+                      ),
                     ],
                   ),
                 ],
@@ -118,7 +141,10 @@ class AlbumFoldersScreen extends StatelessWidget {
         children: [
           Icon(icon, color: Colors.white, size: 18),
           const SizedBox(width: 10),
-          Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white, fontSize: 12),
+          ),
         ],
       ),
     );
