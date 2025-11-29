@@ -614,9 +614,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
-
-                // Expandable Tiles
-                const FaqTile(title: "dummy text dummy text"),
+                GestureDetector(
+                  onTap: () {
+                    _showFaqDetailDialog(context);
+                  },
+                  child: const FaqTile(title: "dummy text dummy text"),
+                ),
                 const FaqTile(title: "dummy text dummy text"),
                 const FaqTile(title: "dummy text dummy text"),
 

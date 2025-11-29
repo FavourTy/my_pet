@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/album/album_screen.dart';
 import 'package:my_pet/utils/colors.dart';
 
 
@@ -72,12 +73,17 @@ class DarkStatsScaffold extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    const Text(
-                      "all photos",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> AlbumHomeScreen()));
+                      },
+                      child: const Text(
+                        "all photos",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_pet/screens/alarm/alarm_screen.dart';
 
 class SideNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      {'label': 'Event', 'icon': Icons.calendar_today, 'route': '/event-plaza'},
+      {'label': 'Event', 'icon': Icons.calendar_today, 'route': '/'},
       {
         'label': 'AI Pet',
         'icon': Icons.auto_awesome,
@@ -27,6 +28,13 @@ class SideNavigation extends StatelessWidget {
               final route = item['route'] as String;
               if (route != '/') {
                 context.push(route);
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AlarmListScreen(),
+                  ),
+                );
               }
             },
             child: Container(

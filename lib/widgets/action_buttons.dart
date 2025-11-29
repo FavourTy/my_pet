@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_pet/screens/onboarding/steps_graph.dart';
 
 class ActionButtons extends StatelessWidget {
   final int selectedTab;
@@ -18,9 +19,19 @@ class ActionButtons extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 final route = button['route'] as String?;
-                if (route != null && route != '/') {
-                  context.push(route);
+                if (route != '/') {
+                  context.push(route!);
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StepsGraphScreen()),
+                  );
                 }
+                // if (route != null && route != '/') {
+                //   context.push(route);
+                // }else {
+                //   Navigator.push(context, MaterialPageRoute(builder: (context)=> StepsGraphScreen()));
+                // }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFF8E079),

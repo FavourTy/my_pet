@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/screens/game_mode.dart';
+import 'package:my_pet/screens/onboarding/start.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -66,7 +67,8 @@ class PetGameApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
+      home: StartScreen(),
       title: 'Pet Game',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -87,7 +89,8 @@ class PetGameApp extends StatelessWidget {
           bodyMedium: TextStyle(fontSize: 14),
         ),
       ),
-      routerConfig: _router,
+
+      // routerConfig: _router,
       debugShowCheckedModeBanner: false,
     );
   }

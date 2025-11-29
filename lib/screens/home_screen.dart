@@ -739,6 +739,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:my_pet/widgets/dialog_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/app_state_provider.dart';
@@ -759,6 +760,31 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Changed to Asset Image as requested
   final String _bgImage = 'assets/images/bg_image.png';
+  void _showLoveDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "years of love",
+        tab2Label: "HP information",
+        // icon: Icons.close,
+        tab1Content: LoveYearsWidget(),
+        tab2Content: HPInfoWidget(),
+      ),
+    );
+  }
+
+  void _showStepsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const TabbedDialog(
+        tab1Label: "number of steps",
+        tab2Label: "points",
+        //  icon: Icons.close,
+        tab1Content: StepCounterWidget(),
+        tab2Content: PointsListWidget(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -810,47 +836,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: StatusBarWidget(),
                     ),
 
-                    // Header with HP and Currency
                     Positioned(
-                      // UPDATED: Moved up from 60 to 10
+                     
                       top: 10,
-                      left: 12, // Reduced padding slightly to save space
+                      left: 12,
                       right: 12,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // HP Bar - Wrapped in Flexible to prevent overflow
+                         
                           Flexible(flex: 4, child: _buildHPBar(activePet)),
 
                           SizedBox(width: 8),
-
-                          // Currency Display - Wrapped in Flexible
                           if (user != null)
                             Flexible(
                               flex: 5,
-                              child: CurrencyDisplay(user: user),
+                              child: GestureDetector(
+                                onTap: () {
+                                  _showStepsDialog(context);
+                                },
+                                child: CurrencyDisplay(user: user),
+                              ),
                             ),
                         ],
                       ),
                     ).animate().fadeIn(duration: 500.ms).slideY(begin: -0.2),
-
-                    // Side Navigation
-                    // INCREASED right padding to 20 to prevent cutting off
                     Positioned(
                       right: 20,
                       top: 180,
                       child: SideNavigation(),
                     ).animate().fadeIn(delay: 200.ms).slideX(begin: 1),
 
-                    // Action Buttons
                     Positioned(
                       bottom: 96,
                       left: 0,
                       right: 0,
                       child: ActionButtons(selectedTab: _selectedTabIndex),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.5),
-
-                    // Bottom Navigation
                     Positioned(
                       bottom: 0,
                       left: 0,
@@ -881,79 +903,84 @@ class _HomeScreenState extends State<HomeScreen> {
     final double hpPercent = pet?.hpPercentage ?? 1.0;
     final int yearsOld = pet?.yearsOld ?? 0;
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 8,
-      ), // Reduced padding
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min, // Shrink to fit content
-        children: [
-          Icon(
-            Icons.favorite,
-            color: Color(0xFFFF6B9D),
-            size: 24,
-          ), // Slightly smaller icon
-          SizedBox(width: 8),
-          Flexible(
-            // Allow column to shrink
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '$currentHp/$maxHp',
-                  style: TextStyle(
-                    fontSize: 12, // Slightly smaller font
-                    color: Color(0xFF8C8C8C),
-                    fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        _showLoveDialog(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 8,
+        ), // Reduced padding
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.95),
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min, // Shrink to fit content
+          children: [
+            Icon(
+              Icons.favorite,
+              color: Color(0xFFFF6B9D),
+              size: 24,
+            ), // Slightly smaller icon
+            SizedBox(width: 8),
+            Flexible(
+              // Allow column to shrink
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '$currentHp/$maxHp',
+                    style: TextStyle(
+                      fontSize: 12, // Slightly smaller font
+                      color: Color(0xFF8C8C8C),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Container(
-                  width: 60, // Reduced width from 80 to 60 to fix overflow
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                  child: FractionallySizedBox(
-                    alignment: Alignment.centerLeft,
-                    widthFactor: hpPercent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFFFC0CB), Color(0xFFFF6B9D)],
+                  Container(
+                    width: 60, // Reduced width from 80 to 60 to fix overflow
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    child: FractionallySizedBox(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: hpPercent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFFFFC0CB), Color(0xFFFF6B9D)],
+                          ),
+                          borderRadius: BorderRadius.circular(2),
                         ),
-                        borderRadius: BorderRadius.circular(2),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(width: 8),
-          // Years Old Text - Wrapped to handle small screens
-          Flexible(
-            child: Text(
-              '$yearsOld yrs',
-              style: TextStyle(fontSize: 10, color: Color(0xFF8C8C8C)),
-              overflow: TextOverflow.ellipsis,
+            SizedBox(width: 8),
+            // Years Old Text - Wrapped to handle small screens
+            Flexible(
+              child: Text(
+                '$yearsOld yrs',
+                style: TextStyle(fontSize: 10, color: Color(0xFF8C8C8C)),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
