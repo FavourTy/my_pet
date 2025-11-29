@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/bulletin_widgets.dart';
-import '../widgets/common_widgets.dart'; // For PopupHeader/CircleBtn if needed
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/bulletin.dart';
+// For PopupHeader/CircleBtn if needed
 
 // ============================================================================
 // SCREEN 1: BULLETIN BOARD CATEGORY LIST

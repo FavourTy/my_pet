@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/common_widgets.dart'; // For HUD widgets if needed
+import 'package:my_pet/utils/colors.dart';
+// For HUD widgets if needed
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -16,25 +16,49 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 // 1. Header
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   child: Row(
                     children: [
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
-                        child: const CircleAvatar(backgroundColor: AppColors.primaryYellow, radius: 15, child: Icon(Icons.close, size: 16, color: Colors.black54)),
+                        child: const CircleAvatar(
+                          backgroundColor: AppColors.primaryYellow,
+                          radius: 15,
+                          child: Icon(
+                            Icons.close,
+                            size: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
                       ),
                       const Expanded(
                         child: Center(
-                          child: Text("Profile", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54)),
+                          child: Text(
+                            "Profile",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Text("ID:Aaaa1234  #", style: TextStyle(fontSize: 10, color: Colors.black54)),
+                        child: const Text(
+                          "ID:Aaaa1234  #",
+                          style: TextStyle(fontSize: 10, color: Colors.black54),
+                        ),
                       ),
                     ],
                   ),
@@ -50,9 +74,22 @@ class ProfileScreen extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                            decoration: BoxDecoration(color: AppColors.primaryYellow, borderRadius: BorderRadius.circular(20)),
-                            child: const Text("Edit", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54)),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryYellow,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Text(
+                              "Edit",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -71,27 +108,72 @@ class ProfileScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    width: 80, height: 80,
-                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey)),
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.grey),
+                                    ),
                                   ),
                                   const SizedBox(width: 15),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text("Owner name: xxxx", style: TextStyle(fontSize: 12, color: Colors.black54)),
-                                        const Text("Years of love: XX years XX da", style: TextStyle(fontSize: 12, color: Colors.black54)),
-                                        const Text("Residence: XXXTown", style: TextStyle(fontSize: 12, color: Colors.black54)),
+                                        const Text(
+                                          "Owner name: xxxx",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                        const Text(
+                                          "Years of love: XX years XX da",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                        const Text(
+                                          "Residence: XXXTown",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
                                         const SizedBox(height: 10),
                                         Row(
                                           children: const [
-                                            CircleAvatar(radius: 12, backgroundColor: Colors.white, child: Text("badge", style: TextStyle(fontSize: 6))),
+                                            CircleAvatar(
+                                              radius: 12,
+                                              backgroundColor: Colors.white,
+                                              child: Text(
+                                                "badge",
+                                                style: TextStyle(fontSize: 6),
+                                              ),
+                                            ),
                                             SizedBox(width: 5),
-                                            CircleAvatar(radius: 12, backgroundColor: Colors.white, child: Text("badge", style: TextStyle(fontSize: 6))),
+                                            CircleAvatar(
+                                              radius: 12,
+                                              backgroundColor: Colors.white,
+                                              child: Text(
+                                                "badge",
+                                                style: TextStyle(fontSize: 6),
+                                              ),
+                                            ),
                                             SizedBox(width: 5),
-                                            CircleAvatar(radius: 12, backgroundColor: Colors.white, child: Text("badge", style: TextStyle(fontSize: 6))),
+                                            CircleAvatar(
+                                              radius: 12,
+                                              backgroundColor: Colors.white,
+                                              child: Text(
+                                                "badge",
+                                                style: TextStyle(fontSize: 6),
+                                              ),
+                                            ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -102,20 +184,58 @@ class ProfileScreen extends StatelessWidget {
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(10),
                                 color: const Color(0xFFEEEEEE),
-                                child: const Text("dummy text dummy text dummy text\ndummy text dummy text dummy text", style: TextStyle(fontSize: 10, color: Colors.grey)),
+                                child: const Text(
+                                  "dummy text dummy text dummy text\ndummy text dummy text dummy text",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 15),
-                              const Text("Breeding status", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54)),
+                              const Text(
+                                "Breeding status",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
+                              ),
                               const Divider(color: Colors.grey),
-                              const Text("Number of tournament participants XX times", style: TextStyle(fontSize: 10, color: Colors.black54)),
-                              const Text("Number of walks: XX times", style: TextStyle(fontSize: 10, color: Colors.black54)),
-                              const Text("Number of event participants XX times", style: TextStyle(fontSize: 10, color: Colors.black54)),
+                              const Text(
+                                "Number of tournament participants XX times",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const Text(
+                                "Number of walks: XX times",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const Text(
+                                "Number of event participants XX times",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.black54,
+                                ),
+                              ),
                             ],
                           ),
                         ),
 
                         const SizedBox(height: 20),
-                        const Text("Breeding pets", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54)),
+                        const Text(
+                          "Breeding pets",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                          ),
+                        ),
                         const SizedBox(height: 10),
 
                         // 3. Pets List
@@ -129,20 +249,23 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             // Float Button (Friend Request Trigger)
             Positioned(
-               bottom: 100,
-               left: 20,
-               child: GestureDetector(
-                 onTap: () => _showFriendRequestDialog(context),
-                 child: Container(
-                   padding: const EdgeInsets.all(12),
-                   decoration: const BoxDecoration(color: AppColors.primaryYellow, shape: BoxShape.circle),
-                   child: const Icon(Icons.person_add, color: Colors.white),
-                 ),
-               ),
-            )
+              bottom: 100,
+              left: 20,
+              child: GestureDetector(
+                onTap: () => _showFriendRequestDialog(context),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: const BoxDecoration(
+                    color: AppColors.primaryYellow,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.person_add, color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -158,17 +281,36 @@ class ProfileScreen extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(width: 60, height: 60, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8))),
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
           const SizedBox(width: 10),
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Pet name: xxxx", style: TextStyle(fontSize: 10, color: Colors.black54)),
-              Text("Type: Chihuahua", style: TextStyle(fontSize: 10, color: Colors.black54)),
-              Text("Birthday: 2027/07/07", style: TextStyle(fontSize: 10, color: Colors.black54)),
-              Text("Breeding start date: 2027/07/07", style: TextStyle(fontSize: 10, color: Colors.black54)),
+              Text(
+                "Pet name: xxxx",
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              Text(
+                "Type: Chihuahua",
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              Text(
+                "Birthday: 2027/07/07",
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              Text(
+                "Breeding start date: 2027/07/07",
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -204,41 +346,78 @@ class _FriendRequestDialogState extends State<_FriendRequestDialog> {
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("To Mr. xxx", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                const Text("Do you want to request a friend?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text(
+                  "To Mr. xxx",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  "Do you want to request a friend?",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
-                const Text("Select message to send", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                const Text(
+                  "Select message to send",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
-                
+
                 _buildRadioOption(0, "nice to meet you! Thank you!"),
                 _buildRadioOption(1, "Hello. Please approve if you like!"),
                 _buildRadioOption(2, "Free entry (maximum 200 characters)"),
-                
+
                 const SizedBox(height: 10),
                 Container(
                   height: 80,
                   width: double.infinity,
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(border: Border.all(color: Colors.grey), borderRadius: BorderRadius.circular(10)),
-                  child: const Text("dummy text dummy text dummy text...", style: TextStyle(fontSize: 10, color: Colors.grey)),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    "dummy text dummy text dummy text...",
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
                 ),
-                
+
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    Expanded(child: _buildBtn("No", false, () => Navigator.pop(context))),
+                    Expanded(
+                      child: _buildBtn(
+                        "No",
+                        false,
+                        () => Navigator.pop(context),
+                      ),
+                    ),
                     const SizedBox(width: 10),
-                    Expanded(child: _buildBtn("yes", true, () => Navigator.pop(context))),
+                    Expanded(
+                      child: _buildBtn(
+                        "yes",
+                        true,
+                        () => Navigator.pop(context),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          Positioned(top: -15, left: -5, child: const CircleAvatar(backgroundColor: AppColors.primaryYellow, child: Icon(Icons.close, size: 20, color: Colors.black54))),
+          Positioned(
+            top: -15,
+            left: -5,
+            child: const CircleAvatar(
+              backgroundColor: AppColors.primaryYellow,
+              child: Icon(Icons.close, size: 20, color: Colors.black54),
+            ),
+          ),
         ],
       ),
     );
@@ -248,12 +427,17 @@ class _FriendRequestDialogState extends State<_FriendRequestDialog> {
     return Row(
       children: [
         Radio(
-          value: index, 
-          groupValue: _selectedOption, 
+          value: index,
+          groupValue: _selectedOption,
           onChanged: (v) => setState(() => _selectedOption = v as int),
           activeColor: AppColors.primaryYellow,
         ),
-        Expanded(child: Text(text, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold))),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }
@@ -267,7 +451,16 @@ class _FriendRequestDialogState extends State<_FriendRequestDialog> {
           color: isYellow ? AppColors.primaryYellow : Colors.grey[300],
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Center(child: Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: isYellow ? Colors.black54 : Colors.grey[600]))),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: isYellow ? Colors.black54 : Colors.grey[600],
+            ),
+          ),
+        ),
       ),
     );
   }

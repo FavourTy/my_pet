@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
 // 1. Bulletin Category Tile (Screen 1)
 class BulletinCategoryTile extends StatelessWidget {
@@ -178,10 +178,7 @@ class PostCard extends StatelessWidget {
                 children: [
                   Text(
                     time,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: Colors.grey[400],
-                    ),
+                    style: TextStyle(fontSize: 10, color: Colors.grey[400]),
                   ),
                   if (isEdited) ...[
                     const SizedBox(width: 10),
