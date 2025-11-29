@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
 // ... (Previous code) ...
 
@@ -13,7 +13,7 @@ class WardrobeScreen13 extends StatefulWidget {
 
 class _WardrobeScreen13State extends State<WardrobeScreen13> {
   int _mainTab = 2; // 0=In Use, 1=Wish List, 2=Duplicate
-  int _subTab = 0;  // 0=Everything
+  int _subTab = 0; // 0=Everything
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,24 @@ class _WardrobeScreen13State extends State<WardrobeScreen13> {
           Container(
             height: 700,
             padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               children: [
-                const Align(alignment: Alignment.centerRight, child: Padding(padding: EdgeInsets.only(right: 10), child: Text("Entry procedure >", style: TextStyle(fontSize: 10, color: Colors.orange)))),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Text(
+                      "Entry procedure >",
+                      style: TextStyle(fontSize: 10, color: Colors.orange),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 10),
-                
+
                 // Main Tabs
                 Row(
                   children: [
@@ -40,7 +52,7 @@ class _WardrobeScreen13State extends State<WardrobeScreen13> {
                     _buildTab("Duplicate", _mainTab == 2, isYellow: true),
                   ],
                 ),
-                
+
                 // Sub Tabs
                 const SizedBox(height: 10),
                 SingleChildScrollView(
@@ -54,49 +66,110 @@ class _WardrobeScreen13State extends State<WardrobeScreen13> {
                     ],
                   ),
                 ),
-                
+
                 // Grid
                 Expanded(
                   child: GridView.builder(
                     padding: const EdgeInsets.only(top: 10),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5, mainAxisSpacing: 5, crossAxisSpacing: 5, childAspectRatio: 0.8),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 5,
+                          childAspectRatio: 0.8,
+                        ),
                     itemCount: 25,
                     itemBuilder: (context, index) {
-                      final isSelected = index == 0 || index == 12 || index == 13; // Demo selection
+                      final isSelected =
+                          index == 0 ||
+                          index == 12 ||
+                          index == 13; // Demo selection
                       return Container(
                         decoration: BoxDecoration(
                           color: const Color(0xFFF5E6CA),
                           borderRadius: BorderRadius.circular(8),
-                          border: isSelected ? Border.all(color: AppColors.primaryYellow, width: 2) : null,
+                          border: isSelected
+                              ? Border.all(
+                                  color: AppColors.primaryYellow,
+                                  width: 2,
+                                )
+                              : null,
                         ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
                             const Icon(Icons.checkroom, color: Colors.brown),
-                            const Positioned(bottom: 2, child: Text("10", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white))),
+                            const Positioned(
+                              bottom: 2,
+                              child: Text(
+                                "10",
+                                style: TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                             if (isSelected)
-                              const Positioned(bottom: 2, right: 2, child: Icon(Icons.check_circle, color: AppColors.primaryYellow, size: 12)),
+                              const Positioned(
+                                bottom: 2,
+                                right: 2,
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: AppColors.primaryYellow,
+                                  size: 12,
+                                ),
+                              ),
                           ],
                         ),
                       );
                     },
                   ),
                 ),
-                
+
                 // Footer
-                const Text("Selected 0/15", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                const Text(
+                  "Selected 0/15",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 5),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                  decoration: BoxDecoration(color: AppColors.primaryYellow.withOpacity(0.5), borderRadius: BorderRadius.circular(20)),
-                  child: const Text("Check", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryYellow.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    "Check",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          
-          Positioned(top: -15, left: 0, child: const CircleAvatar(backgroundColor: AppColors.primaryYellow, child: Icon(Icons.close, size: 20, color: Colors.black54))),
-          Positioned(top: -15, right: 0, child: const CircleAvatar(backgroundColor: AppColors.primaryYellow, child: Icon(Icons.question_mark, size: 20, color: Colors.black54))),
+
+          Positioned(
+            top: -15,
+            left: 0,
+            child: const CircleAvatar(
+              backgroundColor: AppColors.primaryYellow,
+              child: Icon(Icons.close, size: 20, color: Colors.black54),
+            ),
+          ),
+          Positioned(
+            top: -15,
+            right: 0,
+            child: const CircleAvatar(
+              backgroundColor: AppColors.primaryYellow,
+              child: Icon(Icons.question_mark, size: 20, color: Colors.black54),
+            ),
+          ),
         ],
       ),
     );
@@ -107,10 +180,20 @@ class _WardrobeScreen13State extends State<WardrobeScreen13> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: isActive ? (isYellow ? AppColors.primaryYellow : Colors.grey[400]) : Colors.grey[300],
+          color: isActive
+              ? (isYellow ? AppColors.primaryYellow : Colors.grey[400])
+              : Colors.grey[300],
           borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
         ),
-        child: Center(child: Text(label, style: TextStyle(fontSize: 10, color: isActive ? Colors.black87 : Colors.grey[600]))),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: isActive ? Colors.black87 : Colors.grey[600],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -120,7 +203,9 @@ class _WardrobeScreen13State extends State<WardrobeScreen13> {
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: isActive ? AppColors.primaryYellow.withOpacity(0.5) : Colors.grey[300],
+        color: isActive
+            ? AppColors.primaryYellow.withOpacity(0.5)
+            : Colors.grey[300],
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(label, style: const TextStyle(fontSize: 10)),

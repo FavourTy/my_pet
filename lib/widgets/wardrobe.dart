@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
 // 1. Clothing Grid Item
 class ClothingItem extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:my_pet/utils/colors.dart';
 
 class PlayScreen extends StatefulWidget {
   final String mode; // 'ball' or 'touch'

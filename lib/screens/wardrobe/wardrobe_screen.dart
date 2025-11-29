@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
-import '../theme/app_theme.dart';
-import '../widgets/shop_widgets.dart'; // Reusing EditToolBtn
-import '../widgets/wardrobe_widgets.dart'; // New widgets
-import 'shop_popups.dart'; // Reusing Sort/Narrow Dialogs
+import 'package:my_pet/screens/shop/shop_popups.dart';
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/shop.dart';
+import 'package:my_pet/widgets/wardrobe.dart';
 
 class WardrobeScreen extends StatefulWidget {
   const WardrobeScreen({super.key});

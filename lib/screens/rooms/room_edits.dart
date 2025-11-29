@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
-import '../widgets/shop_widgets.dart';
+import 'package:my_pet/utils/colors.dart';
+import 'package:my_pet/widgets/shop.dart';
+
 
 class RoomEditScreen extends StatefulWidget {
   const RoomEditScreen({super.key});
