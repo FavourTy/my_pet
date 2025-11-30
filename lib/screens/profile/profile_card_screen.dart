@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/profile/photo_studio_screen.dart';
 import 'package:my_pet/screens/profile/profile_card.dart';
+import 'package:my_pet/screens/profile/qr_scan_screen.dart';
 import 'package:my_pet/utils/colors.dart';
 
 class ProfileCardScreen extends StatelessWidget {
-  const ProfileCardScreen({Key? key}) : super(key: key);
+  const ProfileCardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
