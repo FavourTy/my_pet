@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:my_pet/screens/inventory/item_dialog.dart';
+import 'package:my_pet/utils/colors.dart';
+
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({Key? key}) : super(key: key);
 
