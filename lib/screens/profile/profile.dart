@@ -1,7 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:my_pet/utils/colors.dart';
 
-
 // class ProfileScreen extends StatelessWidget {
 //   const ProfileScreen({super.key});
 
@@ -466,10 +465,8 @@
 //   }
 // }
 
-
-
-
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/profile/customization_dialog.dart';
 import 'package:my_pet/screens/profile/edit_profile.dart';
 import 'package:my_pet/utils/colors.dart';
 // Ensure AppColors is imported or defined as before
@@ -491,23 +488,45 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const CircleAvatar(backgroundColor: AppColors.primaryYellow, radius: 15, child: Icon(Icons.close, size: 16, color: Colors.black54)),
+                    child: const CircleAvatar(
+                      backgroundColor: AppColors.primaryYellow,
+                      radius: 15,
+                      child: Icon(Icons.close, size: 16, color: Colors.black54),
+                    ),
                   ),
                   const Expanded(
                     child: Center(
-                      child: Text("Profile", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54, letterSpacing: 1.0)),
+                      child: Text(
+                        "Profile",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
                       children: const [
-                        Text("ID:Aaaa1234 ", style: TextStyle(fontSize: 10, color: Colors.black54)),
-                        Icon(Icons.copy, size: 10, color: Colors.black54) // Representing the copy icon/hash
+                        Text(
+                          "ID:Aaaa1234 ",
+                          style: TextStyle(fontSize: 10, color: Colors.black54),
+                        ),
+                        Icon(
+                          Icons.copy,
+                          size: 10,
+                          color: Colors.black54,
+                        ), // Representing the copy icon/hash
                       ],
                     ),
                   ),
@@ -525,11 +544,27 @@ class ProfileScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => showDialog(context: context, builder: (_) => const EditProfileDialog()), // SCREEN 3 TRIGGER
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (_) => const EditProfileDialog(),
+                        ), // SCREEN 3 TRIGGER
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-                          decoration: BoxDecoration(color: AppColors.primaryYellow, borderRadius: BorderRadius.circular(20)),
-                          child: const Text("Edit", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryYellow,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -550,16 +585,20 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               // Avatar with Edit Bubble (Triggers Screen 4/6)
                               GestureDetector(
-                                onTap: () => showDialog(context: context, builder: (_) => const CustomizationDialog()), // SCREEN 4/6 TRIGGER
+                                onTap: () => showDialog(
+                                  context: context,
+                                  builder: (_) => const CustomizationDialog(),
+                                ), // SCREEN 4/6 TRIGGER
                                 child: Stack(
                                   clipBehavior: Clip.none,
                                   children: [
                                     Container(
-                                      width: 80, height: 80,
+                                      width: 80,
+                                      height: 80,
                                       decoration: BoxDecoration(
-                                        color: Colors.white, 
-                                        borderRadius: BorderRadius.circular(15), 
-                                        border: Border.all(color: Colors.grey)
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(color: Colors.grey),
                                       ),
                                     ),
                                     Positioned(
@@ -567,10 +606,17 @@ class ProfileScreen extends StatelessWidget {
                                       right: -5,
                                       child: CircleAvatar(
                                         radius: 12,
-                                        backgroundColor: AppColors.primaryYellow,
-                                        child: const Text("edit", style: TextStyle(fontSize: 8, color: Colors.black54)),
+                                        backgroundColor:
+                                            AppColors.primaryYellow,
+                                        child: const Text(
+                                          "edit",
+                                          style: TextStyle(
+                                            fontSize: 8,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -580,56 +626,137 @@ class ProfileScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("Owner name: xxxx", style: TextStyle(fontSize: 12, color: Colors.black54, height: 1.5)),
-                                    const Text("Years of love: XX years XX da", style: TextStyle(fontSize: 12, color: Colors.black54, height: 1.5)),
-                                    const Text("Residence: XXXTown", style: TextStyle(fontSize: 12, color: Colors.black54, height: 1.5)),
+                                    const Text(
+                                      "Owner name: xxxx",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black54,
+                                        height: 1.5,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "Years of love: XX years XX da",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black54,
+                                        height: 1.5,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "Residence: XXXTown",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black54,
+                                        height: 1.5,
+                                      ),
+                                    ),
                                     const SizedBox(height: 8),
                                     Row(
                                       children: const [
-                                        _BadgePlaceholder(text: "tournament\nbatch"),
+                                        _BadgePlaceholder(
+                                          text: "tournament\nbatch",
+                                        ),
                                         SizedBox(width: 5),
-                                        _BadgePlaceholder(text: "tournament\nbatch"),
+                                        _BadgePlaceholder(
+                                          text: "tournament\nbatch",
+                                        ),
                                         SizedBox(width: 5),
-                                        _BadgePlaceholder(text: "tournament\nbatch"),
+                                        _BadgePlaceholder(
+                                          text: "tournament\nbatch",
+                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 15),
-                          
+
                           // Description Box
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(color: const Color(0xFFEEEEEE), borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFEEEEEE),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             child: Column(
                               children: [
-                                const Text("dummy text dummy text dummy text dummy text\ndummy text dummy text dummy text dummy text", 
+                                const Text(
+                                  "dummy text dummy text dummy text dummy text\ndummy text dummy text dummy text dummy text",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 10, color: Colors.grey)),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                                 const SizedBox(height: 5),
-                                const Align(alignment: Alignment.bottomRight, child: Icon(Icons.keyboard_arrow_down, size: 16, color: Colors.grey))
+                                const Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 15),
-                          
+
                           // Breeding Status
-                          const Text("Breeding status", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54)),
-                          const Divider(color: Colors.grey, height: 10, thickness: 1),
+                          const Text(
+                            "Breeding status",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          const Divider(
+                            color: Colors.grey,
+                            height: 10,
+                            thickness: 1,
+                          ),
                           const SizedBox(height: 5),
-                          const Text("Number of tournament participants XX times", style: TextStyle(fontSize: 10, color: Colors.black54, height: 1.5)),
-                          const Text("Number of walks: XX times", style: TextStyle(fontSize: 10, color: Colors.black54, height: 1.5)),
-                          const Text("Number of event participants XX times", style: TextStyle(fontSize: 10, color: Colors.black54, height: 1.5)),
+                          const Text(
+                            "Number of tournament participants XX times",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.black54,
+                              height: 1.5,
+                            ),
+                          ),
+                          const Text(
+                            "Number of walks: XX times",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.black54,
+                              height: 1.5,
+                            ),
+                          ),
+                          const Text(
+                            "Number of event participants XX times",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.black54,
+                              height: 1.5,
+                            ),
+                          ),
                         ],
                       ),
                     ),
 
                     const SizedBox(height: 20),
-                    const Text("Breeding pets", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54)),
+                    const Text(
+                      "Breeding pets",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
+                    ),
                     const SizedBox(height: 10),
 
                     // --- Pets List ---
@@ -659,8 +786,23 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(width: 70, height: 70, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10))),
-              const Positioned(top: 5, left: 5, child: CircleAvatar(radius: 8, backgroundColor: Colors.white, child: Text("icon", style: TextStyle(fontSize: 4))))
+              Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const Positioned(
+                top: 5,
+                left: 5,
+                child: CircleAvatar(
+                  radius: 8,
+                  backgroundColor: Colors.white,
+                  child: Text("icon", style: TextStyle(fontSize: 4)),
+                ),
+              ),
             ],
           ),
           const SizedBox(width: 15),
@@ -668,12 +810,41 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Pet name: xxxx", style: TextStyle(fontSize: 11, color: Colors.black54, fontWeight: FontWeight.bold, height: 1.5)),
-              Text("Type: Chihuahua", style: TextStyle(fontSize: 11, color: Colors.black54, height: 1.5)),
-              Text("Birthday: 2027/07/07", style: TextStyle(fontSize: 11, color: Colors.black54, height: 1.5)),
-              Text("Breeding start date: 2027/07/07", style: TextStyle(fontSize: 11, color: Colors.black54, height: 1.5)),
+              Text(
+                "Pet name: xxxx",
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
+              Text(
+                "Type: Chihuahua",
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.black54,
+                  height: 1.5,
+                ),
+              ),
+              Text(
+                "Birthday: 2027/07/07",
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.black54,
+                  height: 1.5,
+                ),
+              ),
+              Text(
+                "Breeding start date: 2027/07/07",
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.black54,
+                  height: 1.5,
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -688,7 +859,11 @@ class _BadgePlaceholder extends StatelessWidget {
     return CircleAvatar(
       radius: 14,
       backgroundColor: Colors.white,
-      child: Text(text, textAlign: TextAlign.center, style: const TextStyle(fontSize: 5, color: Colors.black)),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 5, color: Colors.black),
+      ),
     );
   }
 }
