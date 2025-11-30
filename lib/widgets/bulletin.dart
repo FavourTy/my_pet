@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/utils/colors.dart';
 
-// 1. Bulletin Category Tile (Screen 1)
 class BulletinCategoryTile extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -63,7 +62,6 @@ class BulletinCategoryTile extends StatelessWidget {
   }
 }
 
-// 2. Post Card (Screen 2, 3, 4, 5, 6)
 class PostCard extends StatelessWidget {
   final String name;
   final String time;
