@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:my_pet/utils/colors.dart';
+
 class BulletinBoardScreen extends StatelessWidget {
   const BulletinBoardScreen({Key? key}) : super(key: key);
 
