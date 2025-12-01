@@ -7,6 +7,7 @@ import 'package:my_pet/screens/onboarding/start.dart';
 import 'package:my_pet/screens/onboarding/steps_graph.dart';
 import 'package:my_pet/screens/profile/profile.dart';
 import 'package:my_pet/screens/profile/social_screen.dart';
+import 'package:my_pet/screens/settings/settings_screen.dart';
 import 'package:my_pet/screens/wishlist/wish_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -54,6 +55,7 @@ class PetGameApp extends StatelessWidget {
         '/social-feed': (context) => SocialFeedScreen(),
         '/board': (context) => BulletinScreen(),
         '/points': (context) => StepsGraphScreen(),
+        '/settings': (context) => SettingsScreen(),
       },
       onGenerateRoute: (settings) {
         // If we push '/pet_detail' and pass arguments

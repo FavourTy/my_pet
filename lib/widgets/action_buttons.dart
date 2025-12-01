@@ -175,7 +175,7 @@ class ActionButtons extends StatelessWidget {
         ];
       case 5: // Settings
         return [
-          {'label': 'Settings', 'icon': Icons.settings, 'route': '/'},
+          {'label': 'Settings', 'icon': Icons.settings, 'route': '/settings'},
           {'label': 'Profile', 'icon': Icons.person, 'route': '/profile'},
           {'label': 'Premium', 'icon': Icons.star, 'route': '/subscription'},
         ];
