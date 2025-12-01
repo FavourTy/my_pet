@@ -18,11 +18,11 @@ class ProfileCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Top Image Area (Pet Image)
+        
           Expanded(
             flex: 3,
             child: Container(
-              color: Colors.lightGreen[100], // Placeholder for the 3D pet scene
+              color: Colors.lightGreen[100], 
               child: Stack(
                 alignment: Alignment.center,
                 children: [
