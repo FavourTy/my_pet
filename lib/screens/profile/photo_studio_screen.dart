@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/profile/photo_preview_screen.dart';
 import 'package:my_pet/screens/profile/profile_card.dart';
 import 'package:my_pet/screens/profile/warning_dialog.dart';
 import 'package:my_pet/utils/colors.dart';
