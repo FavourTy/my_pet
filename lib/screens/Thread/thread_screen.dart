@@ -5,7 +5,7 @@ import 'package:my_pet/utils/colors.dart';
 // If not, ensure you include the AppColors class defined previously.
 
 class ThreadScreen extends StatefulWidget {
-  const ThreadScreen({Key? key}) : super(key: key);
+  const ThreadScreen({super.key});
 
   @override
   _ThreadScreenState createState() => _ThreadScreenState();
@@ -25,9 +25,12 @@ class _ThreadScreenState extends State<ThreadScreen> {
         backgroundColor: Colors.grey[200], // Light grey header bg
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: AppColors.primaryYellow,
-            child: const Icon(Icons.arrow_back, color: Colors.black54, size: 20),
+          child: GestureDetector(
+            onTap: ()=>Navigator.pop(context),
+            child: CircleAvatar(
+              backgroundColor: AppColors.primaryYellow,
+              child: const Icon(Icons.arrow_back, color: Colors.black54, size: 20),
+            ),
           ),
         ),
         title: const Text(

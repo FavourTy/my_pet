@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_pet/screens/onboarding/steps_graph.dart';
+import 'package:my_pet/widgets/dialog_widgets.dart';
 
 class ActionButtons extends StatelessWidget {
   final int selectedTab;
 
-  const ActionButtons({Key? key, required this.selectedTab}) : super(key: key);
+  const ActionButtons({super.key, required this.selectedTab});
 
   @override
   Widget build(BuildContext context) {
     final buttons = _getButtonsForTab(selectedTab);
+    void _showLoveDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (context) => const TabbedDialog(
+          tab1Label: "years of love",
+          tab2Label: "HP information",
+          // icon: Icons.close,
+          tab1Content: LoveYearsWidget(),
+          tab2Content: HPInfoWidget(),
+        ),
+      );
+    }
+
+    void _showStepsDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (context) => const TabbedDialog(
+          tab1Label: "number of steps",
+          tab2Label: "points",
+          //  icon: Icons.close,
+          tab1Content: StepCounterWidget(),
+          tab2Content: PointsListWidget(),
+        ),
+      );
+    }
 
     return Center(
       child: Column(
@@ -18,15 +44,48 @@ class ActionButtons extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 12),
             child: ElevatedButton(
               onPressed: () {
+                // final route = button['route'] as String?;
+
+                final id = button['id'] as String?;
                 final route = button['route'] as String?;
-                if (route != '/') {
-                  context.push(route!);
-                } else {
+
+                // --- 1. HANDLE DIALOGS ---
+                if (id == 'love_years' || id == 'hp_recovery') {
+                  _showLoveDialog(context);
+                } else if (id == 'points_steps') {
+                  _showStepsDialog(context);
+                }
+                // --- 2. HANDLE NAVIGATION ---
+                else if (route != null && route != '/') {
+                  Navigator.pushNamed(context, route);
+                }
+                // --- 3. FALLBACK ---
+                else {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StepsGraphScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const StepsGraphScreen(),
+                    ),
                   );
                 }
+
+                // if (route != null && route != '/') {
+                //   Navigator.pushNamed(context, route);
+                // } else {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => StepsGraphScreen()),
+                //   );
+                // }
+                // final route = button['route'] as String?;
+                // if (route != '/') {
+                //   context.push(route!);
+                // } else {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => StepsGraphScreen()),
+                //   );
+                // }
                 // if (route != null && route != '/') {
                 //   context.push(route);
                 // }else {
@@ -72,13 +131,31 @@ class ActionButtons extends StatelessWidget {
         return [
           {'label': 'Room Makeover', 'icon': Icons.home, 'route': '/rooms'},
           {'label': 'Pet Dress Up', 'icon': Icons.checkroom, 'route': '/'},
-          {'label': 'Wish List', 'icon': Icons.favorite, 'route': '/'},
+          {'label': 'Wish List', 'icon': Icons.favorite, 'route': '/wishlist'},
         ];
       case 2: // Pet
         return [
-          {'label': 'Love Years', 'icon': Icons.favorite, 'route': '/'},
-          {'label': 'HP Recovery', 'icon': Icons.pets, 'route': '/'},
-          {'label': 'Points & Steps', 'icon': Icons.trending_up, 'route': '/'},
+          // {'label': 'Love Years', 'icon': Icons.favorite, 'route': '/'},
+          // {'label': 'HP Recovery', 'icon': Icons.pets, 'route': '/'},
+          // {'label': 'Points & Steps', 'icon': Icons.trending_up, 'route': '/'},
+          {
+            'label': 'Love Years',
+            'icon': Icons.favorite,
+            'route': null,
+            'id': 'love_years',
+          },
+          {
+            'label': 'HP Recovery',
+            'icon': Icons.pets,
+            'route': null,
+            'id': 'hp_recovery',
+          },
+          {
+            'label': 'Points & Steps',
+            'icon': Icons.trending_up,
+            'route': null,
+            'id': 'points_steps',
+          },
         ];
       case 3: // Going Out
         return [
@@ -88,9 +165,13 @@ class ActionButtons extends StatelessWidget {
         ];
       case 4: // Board
         return [
-          {'label': 'Social Feed', 'icon': Icons.public, 'route': '/plaza'},
-          {'label': 'My Board', 'icon': Icons.dashboard, 'route': '/plaza'},
-          {'label': 'Threads', 'icon': Icons.forum, 'route': '/plaza'},
+          {
+            'label': 'Social Feed',
+            'icon': Icons.public,
+            'route': '/social-feed',
+          },
+          {'label': 'My Board', 'icon': Icons.dashboard, 'route': '/board'},
+          {'label': 'Threads', 'icon': Icons.forum, 'route': '/thread'},
         ];
       case 5: // Settings
         return [

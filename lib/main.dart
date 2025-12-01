@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/Thread/thread_screen.dart';
+import 'package:my_pet/screens/bulletin_board/bulletin_board.dart';
+import 'package:my_pet/screens/bulletin_board/bulletin_screen.dart';
 import 'package:my_pet/screens/game_mode.dart';
 import 'package:my_pet/screens/onboarding/start.dart';
+import 'package:my_pet/screens/onboarding/steps_graph.dart';
+import 'package:my_pet/screens/profile/profile.dart';
+import 'package:my_pet/screens/profile/social_screen.dart';
+import 'package:my_pet/screens/wishlist/wish_list_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'providers/app_state_provider.dart';
-import 'screens/home_screen.dart';
 import 'screens/gacha_screen.dart';
 import 'screens/plaza_screen.dart';
 import 'screens/shop_screen.dart';
 import 'screens/event_plaza_screen.dart';
 import 'screens/bazaar_screen.dart';
-import 'screens/profile_screen.dart';
-import 'screens/rooms_screen.dart';
+
 import 'screens/pet_detail_screen.dart';
 import 'screens/subscription_screen.dart';
 import 'screens/ai_pet_creation_screen.dart';
@@ -28,47 +32,40 @@ void main() async {
 }
 
 class PetGameApp extends StatelessWidget {
-  PetGameApp({Key? key}) : super(key: key);
-
-  final GoRouter _router = GoRouter(
-    routes: [
-      GoRoute(path: '/', builder: (context, state) => HomeScreen()),
-      GoRoute(path: '/gacha', builder: (context, state) => GachaScreen()),
-      GoRoute(path: '/plaza', builder: (context, state) => PlazaScreen()),
-      GoRoute(
-        path: '/event-plaza',
-        builder: (context, state) => EventPlazaScreen(),
-      ),
-      GoRoute(path: '/shop', builder: (context, state) => ShopScreen()),
-      GoRoute(path: '/bazaar', builder: (context, state) => BazaarScreen()),
-      GoRoute(path: '/profile', builder: (context, state) => ProfileScreen()),
-      GoRoute(path: '/rooms', builder: (context, state) => GameRoomScreen()),
-      GoRoute(
-        path: '/pet/:id',
-        builder: (context, state) {
-          final petId = state.pathParameters['id']!;
-          return PetDetailScreen(petId: petId);
-        },
-      ),
-      GoRoute(
-        path: '/subscription',
-        builder: (context, state) => SubscriptionScreen(),
-      ),
-      GoRoute(
-        path: '/ai-pet-creation',
-        builder: (context, state) => AiPetCreationScreen(),
-      ),
-      GoRoute(
-        path: '/ai-education',
-        builder: (context, state) => AiEducationScreen(),
-      ),
-    ],
-  );
+  PetGameApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StartScreen(),
+      routes: {
+        '/': (context) => StartScreen(),
+        '/gacha': (context) => GachaScreen(),
+        '/plaza': (context) => PlazaScreen(),
+        '/event-plaza': (context) => EventPlazaScreen(),
+        '/shop': (context) => ShopScreen(),
+        '/bazaar': (context) => BazaarScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/rooms': (context) => GameRoomScreen(),
+        '/subscription': (context) => SubscriptionScreen(),
+        '/ai-pet-creation': (context) => AiPetCreationScreen(),
+        '/ai-education': (context) => AiEducationScreen(),
+        '/wishlist': (context) => WishlistScreen(),
+        '/thread': (context) => ThreadScreen(),
+        '/social-feed': (context) => SocialFeedScreen(),
+        '/board': (context) => BulletinScreen(),
+        '/points': (context) => StepsGraphScreen(),
+      },
+      onGenerateRoute: (settings) {
+        // If we push '/pet_detail' and pass arguments
+        if (settings.name == '/pet_detail') {
+          final args = settings.arguments as String; // Getting the ID
+          return MaterialPageRoute(
+            builder: (context) => PetDetailScreen(petId: args),
+          );
+        }
+        return null; // Let the app handle unknown routes (or 404)
+      },
+      initialRoute: '/',
       title: 'Pet Game',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

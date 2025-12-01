@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet/screens/bulletin_board/bulletin_feed_detail.dart';
 import 'package:my_pet/utils/colors.dart';
 import 'package:my_pet/widgets/action_bottom_sheet.dart';
 
-class BulletinBoardScreen extends StatelessWidget {
-  const BulletinBoardScreen({super.key});
+class BulletinScreen extends StatelessWidget {
+  const BulletinScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,12 @@ class BulletinBoardScreen extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: AppColors.primaryYellow,
-            child: const Icon(Icons.arrow_back, color: Colors.black54),
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: CircleAvatar(
+              backgroundColor: AppColors.primaryYellow,
+              child: const Icon(Icons.arrow_back, color: Colors.black54),
+            ),
           ),
         ),
         title: const Text(
@@ -57,12 +61,22 @@ class BulletinBoardScreen extends StatelessWidget {
                     // Header
                     Row(
                       children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(8),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const BulletinFeedDetail(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                         const SizedBox(width: 10),
