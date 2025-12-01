@@ -20,6 +20,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _energySaving = true;
   bool _vibration = true;
   // Call this for Screen 11 (from the FAQ list)
+
+  // Notifications
+  bool _notifRecovery = true;
+  bool _notifExchange = true;
+  bool _notifPresent = true;
+  bool _notifHarvest = true;
+  bool _notifMyShop = true;
+
+  // Language
+  bool _isJapanese = false;
+  bool _isEnglish = true;
+
+  // Arrival Mark
+  bool _newArrivalItems = true;
+
+  // Display Settings
+  String _breedingHint = "display"; // "display" or "hidden"
+  String _walkingStatus = "display"; // "display" or "hidden"
   void _showFaqDetail(BuildContext context) {
     showDialog(context: context, builder: (_) => const FaqDetailDialog());
   }
@@ -101,9 +119,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 children: [
+                  // SettingsTile(
+                  //   title: "ID display",
+                  //   onTap: () => _showIdDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "sound settings",
+                  //   onTap: () => _showSoundDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "graphic settings",
+                  //   onTap: () => _showGraphicDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "Re-download assets",
+                  //   onTap: () => _showRedownloadDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "clear cache",
+                  //   onTap: () => _showClearCacheDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "Frequently asked questions",
+                  //   onTap: () => _showFaqDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "Energy saving mode",
+                  //   onTap: () => _showEnergyDialog(context),
+                  // ),
+                  // SettingsTile(
+                  //   title: "Vibration settings",
+                  //   onTap: () => _showVibrationDialog(context),
+                  // ),
+                  SettingsTile(
+                    title: "Handover settings",
+                    onTap: () => _showHandoverDialog(context),
+                  ),
                   SettingsTile(
                     title: "ID display",
                     onTap: () => _showIdDialog(context),
+                  ),
+                  SettingsTile(
+                    title: "Notification settings",
+                    onTap: () => _showNotificationDialog(context),
                   ),
                   SettingsTile(
                     title: "sound settings",
@@ -114,23 +172,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: () => _showGraphicDialog(context),
                   ),
                   SettingsTile(
-                    title: "Re-download assets",
-                    onTap: () => _showRedownloadDialog(context),
+                    title: "Language settings",
+                    onTap: () => _showLanguageDialog(context),
                   ),
                   SettingsTile(
-                    title: "clear cache",
-                    onTap: () => _showClearCacheDialog(context),
+                    title: "New arrival mark display settings",
+                    onTap: () => _showNewArrivalDialog(context),
                   ),
                   SettingsTile(
-                    title: "Frequently asked questions",
-                    onTap: () => _showFaqDialog(context),
+                    title: "Breeding hint display settings",
+                    onTap: () => _showBreedingHintDialog(context),
                   ),
+                  SettingsTile(
+                    title: "Public settings for walking status",
+                    onTap: () => _showWalkingStatusDialog(context),
+                  ),
+                  SettingsTile(title: "blacklist", onTap: () {}), // Placeholder
+                  SettingsTile(
+                    title: "Withdrawal procedure",
+                    onTap: () {},
+                  ), // Placeholder
                   SettingsTile(
                     title: "Energy saving mode",
                     onTap: () => _showEnergyDialog(context),
                   ),
                   SettingsTile(
-                    title: "Vibration settings",
+                    title: "Walking vibe setting",
                     onTap: () => _showVibrationDialog(context),
                   ),
                 ],
@@ -142,7 +209,307 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // --- SCREEN 3: ID ---
+  void _showHandoverDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => SettingsDialog(
+        title: "Handover settings",
+        icon: Icons.close,
+        content: Column(
+          children: [
+            _buildHandoverInput(
+              "ID",
+              "Please enter at least 6 half-width alphanumeric characters",
+            ),
+            const SizedBox(height: 15),
+            _buildHandoverInput(
+              "password",
+              "Please enter a string different from the ID",
+            ),
+            const SizedBox(height: 15),
+            _buildHandoverInput(
+              "Confirm password",
+              "Please enter at least 6 half-width alphanumeric characters",
+            ),
+            const SizedBox(height: 25),
+            const Text(
+              "By logging in using the registered transfer information,\nIf you have deleted the app or\nYou can continue playing with your current data even after changing devices.\nkeep your registered information in a safe place so that you do not forget.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 8, color: Colors.black87),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "If you log in on a device with a different OS, points etc. will not be carried over.\nPlease see FAQ for details.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 8, color: Colors.black87),
+            ),
+            const SizedBox(height: 20),
+            SettingsActionBtn(
+              label: "set",
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHandoverInput(String label, String hint) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+        ),
+        const SizedBox(height: 5),
+        TextField(
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(vertical: 8),
+            hintText: hint,
+            hintStyle: TextStyle(fontSize: 8, color: Colors.grey[400]),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.primaryYellow),
+            ),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(hint, style: const TextStyle(fontSize: 8, color: Colors.grey)),
+      ],
+    );
+  }
+
+  // --- SCREEN 28: NOTIFICATION SETTINGS ---
+  void _showNotificationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => SettingsDialog(
+          title: "Notification settings",
+          icon: Icons.close,
+          content: Column(
+            children: [
+              const Text(
+                "If you don't want to pick up your order late at night,\nPlease use your smartphone's Do Not Disturb mode.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              const SizedBox(height: 30),
+              SettingsToggleRow(
+                label: "Horn Power full recovery",
+                value: _notifRecovery,
+                onChanged: (v) => setState(() => _notifRecovery = v),
+              ),
+              const SizedBox(height: 10),
+              SettingsToggleRow(
+                label: "exchange",
+                value: _notifExchange,
+                onChanged: (v) => setState(() => _notifExchange = v),
+              ),
+              const SizedBox(height: 10),
+              SettingsToggleRow(
+                label: "present",
+                value: _notifPresent,
+                onChanged: (v) => setState(() => _notifPresent = v),
+              ),
+              const SizedBox(height: 10),
+              SettingsToggleRow(
+                label: "Mushrooms can be harvested",
+                value: _notifHarvest,
+                onChanged: (v) => setState(() => _notifHarvest = v),
+              ),
+              const SizedBox(height: 10),
+              SettingsToggleRow(
+                label: "My shop",
+                value: _notifMyShop,
+                onChanged: (v) => setState(() => _notifMyShop = v),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // --- SCREEN 29: LANGUAGE SETTINGS ---
+  void _showLanguageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => SettingsDialog(
+          title: "Language settings",
+          icon: Icons.close,
+          content: Column(
+            children: [
+              const SizedBox(height: 20),
+              SettingsToggleRow(
+                label: "Japanese",
+                value: _isJapanese,
+                onChanged: (v) => setState(() {
+                  _isJapanese = v;
+                  if (v) _isEnglish = false;
+                }),
+              ),
+              const SizedBox(height: 20),
+              SettingsToggleRow(
+                label: "English",
+                value: _isEnglish,
+                onChanged: (v) => setState(() {
+                  _isEnglish = v;
+                  if (v) _isJapanese = false;
+                }),
+              ),
+              const SizedBox(height: 40),
+              SettingsActionBtn(
+                label: "OK",
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // --- SCREEN 30: NEW ARRIVAL MARK ---
+  void _showNewArrivalDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => SettingsDialog(
+          title: "New arrival mark display settings",
+          icon: Icons.close,
+          content: Column(
+            children: [
+              const Text(
+                "You can set whether to display the new arrival mark.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              const SizedBox(height: 40),
+              SettingsToggleRow(
+                label: "Items obtained",
+                value: _newArrivalItems,
+                onChanged: (v) => setState(() => _newArrivalItems = v),
+              ),
+              const SizedBox(height: 40),
+              SettingsActionBtn(
+                label: "OK",
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // --- SCREEN 31: BREEDING HINT DISPLAY ---
+  void _showBreedingHintDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => SettingsDialog(
+          title: "Breeding hint display settings",
+          icon: Icons.close,
+          content: Column(
+            children: [
+              const Text(
+                "When set to display,\nBreeding tips will be displayed to help you",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Current setting: ${_breedingHint == 'display' ? 'Display' : 'Hidden'}",
+                style: const TextStyle(fontSize: 12, color: Colors.black87),
+              ),
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: SettingsActionBtn(
+                      label: "Not displayed",
+                      color: _breedingHint == 'hidden'
+                          ? AppColors.primaryYellow
+                          : Colors.grey[300],
+                      onTap: () => setState(() => _breedingHint = "hidden"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: SettingsActionBtn(
+                      label: "display",
+                      color: _breedingHint == 'display'
+                          ? AppColors.primaryYellow
+                          : Colors.grey[300],
+                      onTap: () => setState(() => _breedingHint = "display"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // --- SCREEN 32: WALKING STATUS PUBLIC SETTINGS ---
+  void _showWalkingStatusDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => SettingsDialog(
+          title: "Public settings for walking status",
+          icon: Icons.close,
+          content: Column(
+            children: [
+              const Text(
+                "If set to Show, when a friend uses\nYou will appear in your friends list while you are out walking.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, color: Colors.black54),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Current setting: ${_walkingStatus == 'display' ? 'Display' : 'Hidden'}",
+                style: const TextStyle(fontSize: 12, color: Colors.black87),
+              ),
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: SettingsActionBtn(
+                      label: "Not displayed",
+                      color: _walkingStatus == 'hidden'
+                          ? AppColors.primaryYellow
+                          : Colors.grey[300],
+                      onTap: () => setState(() => _walkingStatus = "hidden"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: SettingsActionBtn(
+                      label: "display",
+                      color: _walkingStatus == 'display'
+                          ? AppColors.primaryYellow
+                          : Colors.grey[300],
+                      onTap: () => setState(() => _walkingStatus = "display"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _showIdDialog(BuildContext context) {
     showDialog(
       context: context,

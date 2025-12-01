@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/utils/colors.dart';
 
-
 // 1. The Grey Settings Button (Existing)
 class SettingsTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  const SettingsTile({
-    super.key,
-    required this.title,
-    required this.onTap,
-  });
+  const SettingsTile({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +96,7 @@ class SettingsDialog extends StatelessWidget {
           ),
           // Added Question Mark for FAQ dialog
           if (title.toLowerCase().contains("frequently"))
-             Positioned(
+            Positioned(
               top: -15,
               right: -5,
               child: Container(
@@ -110,7 +105,11 @@ class SettingsDialog extends StatelessWidget {
                   color: AppColors.primaryYellow,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.question_mark, color: Colors.black54, size: 20),
+                child: const Icon(
+                  Icons.question_mark,
+                  color: Colors.black54,
+                  size: 20,
+                ),
               ),
             ),
         ],
@@ -161,10 +160,7 @@ class SoundSlider extends StatelessWidget {
               trackHeight: 4,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
             ),
-            child: Slider(
-              value: value,
-              onChanged: onChanged,
-            ),
+            child: Slider(value: value, onChanged: onChanged),
           ),
         ),
       ],
@@ -215,15 +211,16 @@ class GraphicOptionBtn extends StatelessWidget {
   }
 }
 
-
 class SettingsActionBtn extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
+  final Color? color;
 
   const SettingsActionBtn({
     super.key,
     required this.label,
     required this.onTap,
+    this.color,
   });
 
   @override
@@ -322,7 +319,7 @@ class FaqTile extends StatelessWidget {
             height: 8,
             decoration: const BoxDecoration(
               color: AppColors.primaryYellow,
-              shape: BoxShape.rectangle, 
+              shape: BoxShape.rectangle,
             ),
           ),
         ],
@@ -334,7 +331,7 @@ class FaqTile extends StatelessWidget {
 // 8. Small FAQ Button (White outline)
 class FaqSmallBtn extends StatelessWidget {
   final String label;
-  
+
   const FaqSmallBtn({super.key, required this.label});
 
   @override
@@ -349,7 +346,10 @@ class FaqSmallBtn extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            ),
             const Icon(Icons.arrow_drop_down, size: 14, color: Colors.grey),
           ],
         ),
