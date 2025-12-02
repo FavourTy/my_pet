@@ -123,14 +123,22 @@ class ActionButtons extends StatelessWidget {
     switch (tab) {
       case 0: // Shop
         return [
-          {'label': 'Items Shop', 'icon': Icons.shopping_bag, 'route': '/shop'},
+          {
+            'label': 'Items Shop',
+            'icon': Icons.shopping_bag,
+            'route': '/items',
+          },
           {'label': 'Furniture', 'icon': Icons.chair, 'route': '/shop'},
           {'label': 'Clothes', 'icon': Icons.checkroom, 'route': '/shop'},
         ];
       case 1: // Items
         return [
           {'label': 'Room Makeover', 'icon': Icons.home, 'route': '/rooms'},
-          {'label': 'Pet Dress Up', 'icon': Icons.checkroom, 'route': '/'},
+          {
+            'label': 'Pet Dress Up',
+            'icon': Icons.checkroom,
+            'route': '/wardrobe',
+          },
           {'label': 'Wish List', 'icon': Icons.favorite, 'route': '/wishlist'},
         ];
       case 2: // Pet

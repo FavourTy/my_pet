@@ -751,6 +751,8 @@ import '../widgets/side_navigation.dart';
 import '../widgets/action_buttons.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -837,14 +839,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
                     Positioned(
-                     
                       top: 10,
                       left: 12,
                       right: 12,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                         
                           Flexible(flex: 4, child: _buildHPBar(activePet)),
 
                           SizedBox(width: 8),

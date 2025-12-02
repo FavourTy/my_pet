@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet/screens/Thread/thread_screen.dart';
-import 'package:my_pet/screens/bulletin_board/bulletin_board.dart';
+// import 'package:my_pet/screens/bulletin_board/bulletin_board.dart';
 import 'package:my_pet/screens/bulletin_board/bulletin_screen.dart';
 import 'package:my_pet/screens/game_mode.dart';
+import 'package:my_pet/screens/inventory/inventory_screen.dart';
 import 'package:my_pet/screens/onboarding/start.dart';
 import 'package:my_pet/screens/onboarding/steps_graph.dart';
 import 'package:my_pet/screens/profile/profile.dart';
 import 'package:my_pet/screens/profile/social_screen.dart';
 import 'package:my_pet/screens/settings/settings_screen.dart';
+import 'package:my_pet/screens/wardrobe/wardrobe_screen.dart';
 import 'package:my_pet/screens/wishlist/wish_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -56,6 +58,8 @@ class PetGameApp extends StatelessWidget {
         '/board': (context) => BulletinScreen(),
         '/points': (context) => StepsGraphScreen(),
         '/settings': (context) => SettingsScreen(),
+        '/wardrobe': (context) => WardrobeScreen(),
+        '/items': (context) => InventoryScreen(),
       },
       onGenerateRoute: (settings) {
         // If we push '/pet_detail' and pass arguments
